@@ -1,119 +1,296 @@
- import { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
+import { roleSkills } from "./data";
 
-export default function InputForm({ setResult }) {
+export default function InputForm({setResult}){
 
-  const [form, setForm] = useState({
-    skills: "",
-    role: "",
-    experience_level: "",
-    years_experience: 1
-  });
+const [loading,setLoading]=useState(false);
 
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    });
-  };
+const [form,setForm]=useState({
+role:"",
+skills:"",
+years_experience:1
+});
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const [roleInput,setRoleInput]=useState("");
+const [roleSuggestions,setRoleSuggestions]=useState([]);
 
-    const res = await axios.post(
-      "http://127.0.0.1:8000/predict",
-      form
-    );
+const [skillInput,setSkillInput]=useState("");
+const [skillSuggestions,setSkillSuggestions]=useState([]);
 
-    setResult(res.data);
-  };
 
-const cardStyle = {
-  background: "rgba(255,255,255,0.9)",
-  backdropFilter: "blur(10px)",
-  padding: "30px",
-  borderRadius: "14px",
-  width: "420px",
-  boxShadow: "0 10px 40px rgba(0,0,0,0.2)"
+
+/* ================= ROLE SEARCH ================= */
+
+const handleRoleChange=(e)=>{
+const value=e.target.value;
+setRoleInput(value);
+
+const roles=Object.keys(roleSkills);
+
+setRoleSuggestions(
+roles.filter(r =>
+r.toLowerCase().includes(value.toLowerCase())
+)
+);
 };
 
-const inputStyle = {
-  width: "100%",
-  padding: "12px",
-  marginBottom: "15px",
-  borderRadius: "8px",
-  border: "1px solid #cbd5e1",
-  color: "#111",
-};
 
-const buttonStyle = {
-  width: "100%",
-  padding: "13px",
-  border: "none",
-  borderRadius: "8px",
-  background:
-    "linear-gradient(90deg,#2563eb,#06b6d4,#22c55e)",
-  color: "white",
-  fontWeight: "bold",
-  fontSize: "16px",
-  cursor: "pointer",
-};
 
-  return (
-    <form style={cardStyle} onSubmit={handleSubmit}>
+/* ================= SKILL SEARCH ================= */
 
-      <h2 style={{textAlign:"center"}}>
-        Layoff Risk Predictor
-      </h2>
+const handleSkillChange=(e)=>{
+  const value=e.target.value;
+  setSkillInput(value);
 
-      <input
-        style={inputStyle}
-        name="skills"
-        placeholder="Enter Skills"
-        onChange={handleChange}
-        required
-      />
+  const skills=roleSkills[form.role] || [];
 
-      <select
-        style={inputStyle}
-        name="role"
-        onChange={handleChange}
-        required
-      >
-        <option value="">Select Role</option>
-        <option>Frontend Developer</option>
-        <option>Backend Developer</option>
-        <option>Full Stack Developer</option>
-        <option>ML Engineer</option>
-        <option>DevOps Engineer</option>
-        <option>Cybersecurity Engineer</option>
-      </select>
+  const parts=value.split(",");
+  const lastWord=parts[parts.length-1].trim().toLowerCase();
 
-      <select
-        style={inputStyle}
-        name="experience_level"
-        onChange={handleChange}
-        required
-      >
-        <option value="">Experience Level</option>
-        <option>junior</option>
-        <option>mid</option>
-        <option>senior</option>
-      </select>
+  if(!lastWord){
+    setSkillSuggestions([]);
+    return;
+  }
 
-      <input
-        style={inputStyle}
-        type="number"
-        name="years_experience"
-        min="0"
-        placeholder="Years Experience"
-        onChange={handleChange}
-      />
-
-      <button style={buttonStyle}>
-        Predict Risk
-      </button>
-
-    </form>
+  const filtered=skills.filter(skill =>
+    skill.toLowerCase().includes(lastWord)
   );
+
+  setSkillSuggestions(filtered);
+};
+
+
+
+/* ================= SUBMIT ================= */
+
+const handleSubmit=async(e)=>{
+e.preventDefault();
+
+setLoading(true);
+setResult(null);
+
+let level="junior";
+
+if(form.years_experience>=5)
+level="senior";
+else if(form.years_experience>=2)
+level="mid";
+
+const payload={
+...form,
+experience_level:level
+};
+
+try{
+const res=await axios.post(
+"http://127.0.0.1:8000/predict",
+payload
+);
+
+setTimeout(()=>{
+setResult(res.data);
+setLoading(false);
+},900);
+
+}catch(err){
+console.error(err);
+setLoading(false);
+}
+};
+
+
+/* ================= STYLES ================= */
+
+const card={
+background:"rgba(255,255,255,0.9)",
+padding:"35px",
+borderRadius:"16px",
+width:"420px",
+boxShadow:"0 15px 40px rgba(0,0,0,0.2)"
+};
+
+const input={
+  width:"100%",
+  padding:"12px",
+  marginBottom:"15px",
+  borderRadius:"8px",
+  border:"1px solid #ddd",
+  outline:"none"
+};
+
+const button={
+width:"100%",
+padding:"14px",
+borderRadius:"8px",
+border:"none",
+background:
+"linear-gradient(90deg,#2563eb,#06b6d4,#22c55e)",
+color:"white",
+fontWeight:"bold",
+display:"flex",
+justifyContent:"center",
+alignItems:"center",
+gap:"10px"
+};
+
+return(
+<>
+<style>
+{`
+@keyframes spin{
+0%{transform:rotate(0)}
+100%{transform:rotate(360deg)}
+}
+`}
+</style>
+
+<form style={card} onSubmit={handleSubmit}>
+
+<h2 style={{textAlign:"center"}}>
+Career Risk Radar
+</h2>
+
+
+{/* ROLE INPUT */}
+
+<div style={{position:"relative"}}>
+
+<input
+style={input}
+placeholder="Type Role"
+value={roleInput}
+onChange={handleRoleChange}
+/>
+
+{roleSuggestions.length > 0 && roleInput && (
+  <div style={{
+    position:"absolute",
+    top:"42px",
+    left:0,
+    right:0,
+    background:"rgba(255,255,255,0.95)",
+    borderRadius:"8px",
+    border:"1px solid #ddd",
+    maxHeight:"120px",
+    overflowY:"auto",
+    zIndex:10
+  }}>
+    {roleSuggestions.slice(0,5).map(role=>(
+  <div
+    key={role}
+    style={{
+      padding:"8px 12px",
+      fontSize:"14px",
+      color:"#555",
+      cursor:"pointer"
+    }}
+    onClick={()=>{
+      setForm({...form,role});
+      setRoleInput(role.replace(/([A-Z])/g, " $1").trim());
+      setRoleSuggestions([]);
+    }}
+  >
+    {role.replace(/([A-Z])/g, " $1").trim()}
+  </div>
+))}
+  </div>
+
+)}
+
+</div>
+
+
+
+{/* SKILLS INPUT */}
+
+<div style={{position:"relative"}}>
+
+<input
+style={input}
+placeholder="Type Skills"
+value={skillInput}
+onChange={handleSkillChange}
+/>
+
+{skillSuggestions.length > 0 && skillInput && (
+  <div style={{
+    position:"absolute",
+    top:"42px",
+    left:0,
+    right:0,
+    background:"rgba(255,255,255,0.95)",
+    borderRadius:"8px",
+    border:"1px solid #ddd",
+    maxHeight:"120px",
+    overflowY:"auto",
+    zIndex:10
+  }}>
+    {skillSuggestions.slice(0,5).map(skill=>(
+      <div
+        key={skill}
+        style={{
+          padding:"8px 12px",
+          fontSize:"14px",
+          color:"#666",
+          cursor:"pointer"
+        }}
+        onClick={()=>{
+  const parts=skillInput.split(",");
+  parts[parts.length-1]=` ${skill}`;
+  const updated=parts.join(",").replace(/^ /,"");
+
+  setSkillInput(updated);
+  setForm({...form,skills:updated});
+  setSkillSuggestions([]);
+}}
+      >
+        {skill}
+      </div>
+    ))}
+  </div>
+
+)}
+
+</div>
+
+
+
+<input
+style={input}
+type="number"
+placeholder="Years Experience"
+onChange={(e)=>
+setForm({
+...form,
+years_experience:e.target.value
+})
+}
+/>
+
+
+<button style={button} disabled={loading}>
+
+{loading?(
+<>
+<div style={{
+width:"18px",
+height:"18px",
+border:"3px solid white",
+borderTop:"3px solid transparent",
+borderRadius:"50%",
+animation:"spin 1s linear infinite"
+}}/>
+
+Predicting Risk...
+</>
+):
+"Predict Risk"
+}
+
+</button>
+
+</form>
+</>
+);
 }

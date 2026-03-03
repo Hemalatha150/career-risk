@@ -16,16 +16,23 @@ const containerStyle = {
   fontFamily: "Arial",
 };
 
-  return (
-    <div style={containerStyle}>
-      <div>
-        <InputForm setResult={setResult}/>
-        <ResultCard result={result}/>
-      </div>
-    </div>
-  );
-}
+return (
+  <div style={containerStyle}>
 
+    <div style={{
+      display:"flex",
+      gap:"40px",
+      alignItems:"center"
+    }}>
+
+      <InputForm setResult={setResult}/>
+      <ResultCard result={result}/>
+
+    </div>
+
+  </div>
+);
+}
 
 
 export default App;

@@ -1,0 +1,375 @@
+category,primary_skills,years_experience,experience_level,role,experience_score,layoff_risk,ai_impact_score,automation_risk,market_demand,skill_adaptability
+ai/ml engineering,"Computer Vision, TensorFlow, Data Science",1.6,junior,ML Engineer,1,14.5,0.2,0.25,0.9,0.75
+ai/ml engineering,"PyTorch, NLP, Computer Vision",6.2,senior,ML Engineer,3,5.0,0.2,0.25,0.9,0.75
+mobile development,"Android, React Native, iOS",4.9,mid,App Developer,2,49.5,0.5,0.5,0.7,0.65
+data engineering,"Python, Spark, BigQuery",6.9,senior,Data Analyst,3,49.0,0.6,0.65,0.8,0.75
+data engineering,"SQL, Data Warehousing, BigQuery",8.8,senior,Data Analyst,3,49.0,0.6,0.65,0.8,0.75
+web development,"Node.js, HTML/CSS, React",3.2,mid,Full Stack Developer,2,31.0,0.4,0.45,0.8,0.9
+mobile development,"Kotlin, Flutter, React Native",4.6,mid,App Developer,2,49.5,0.5,0.5,0.7,0.65
+data engineering,"Python, BigQuery, SQL",5.4,senior,Data Analyst,3,49.0,0.6,0.65,0.8,0.75
+ai/ml engineering,"Python, Data Science, PyTorch",10.0,senior,ML Engineer,3,5.0,0.2,0.25,0.9,0.75
+ai/ml engineering,"Python, NLP, Data Science",3.9,mid,ML Engineer,2,10.5,0.2,0.25,0.9,0.75
+web development,"Node.js, HTML/CSS, Angular",3.5,mid,Full Stack Developer,2,31.0,0.4,0.45,0.8,0.9
+web development,"Vue.js, HTML/CSS, Node.js",6.6,senior,Full Stack Developer,3,20.5,0.4,0.45,0.8,0.9
+web development,"React, Vue.js, JavaScript",3.4,mid,Frontend Developer,2,69.25,0.7,0.75,0.65,0.7
+mobile development,"Android, Kotlin, React Native",0.9,junior,App Developer,1,59.5,0.5,0.5,0.7,0.65
+devops,"AWS, Azure, CI/CD",5.8,senior,Cloud Engineer,3,8.0,0.2,0.2,0.9,0.85
+ai/ml engineering,"NLP, Data Science, Python",7.2,senior,ML Engineer,3,5.0,0.2,0.25,0.9,0.75
+mobile development,"Kotlin, Flutter, React Native",5.0,mid,App Developer,2,49.5,0.5,0.5,0.7,0.65
+mobile development,"Flutter, iOS, React Native",8.3,senior,App Developer,3,34.5,0.5,0.5,0.7,0.65
+data engineering,"Data Warehousing, BigQuery, ETL",6.9,senior,Data Analyst,3,49.0,0.6,0.65,0.8,0.75
+web development,"HTML/CSS, React, Node.js",3.6,mid,Full Stack Developer,2,31.0,0.4,0.45,0.8,0.9
+mobile development,"React Native, Flutter, Kotlin",4.7,mid,App Developer,2,49.5,0.5,0.5,0.7,0.65
+mobile development,"React Native, iOS, Flutter",3.3,mid,App Developer,2,49.5,0.5,0.5,0.7,0.65
+data engineering,"Spark, BigQuery, ETL",13.0,senior,Data Analyst,3,49.0,0.6,0.65,0.8,0.75
+web development,"Angular, JavaScript, Node.js",7.8,senior,Full Stack Developer,3,20.5,0.4,0.45,0.8,0.9
+ai/ml engineering,"Computer Vision, Data Science, PyTorch",4.4,mid,ML Engineer,2,10.5,0.2,0.25,0.9,0.75
+web development,"React, Angular, HTML/CSS",11.5,senior,Frontend Developer,3,49.75,0.7,0.75,0.65,0.7
+data engineering,"Data Warehousing, Spark, ETL",2.9,mid,Data Analyst,2,70.0,0.6,0.65,0.8,0.75
+web development,"Vue.js, JavaScript, React",7.9,senior,Frontend Developer,3,49.75,0.7,0.75,0.65,0.7
+data engineering,"BigQuery, ETL, Spark",4.0,mid,Data Analyst,2,70.0,0.6,0.65,0.8,0.75
+web development,"HTML/CSS, JavaScript, React",4.9,mid,Frontend Developer,2,69.25,0.7,0.75,0.65,0.7
+mobile development,"Kotlin, Swift, React Native",3.2,mid,Frontend Developer,2,69.25,0.7,0.75,0.65,0.7
+data engineering,"Spark, ETL, Data Warehousing",7.5,senior,Data Analyst,3,49.0,0.6,0.65,0.8,0.75
+data engineering,"BigQuery, Python, ETL",2.8,mid,Data Analyst,2,70.0,0.6,0.65,0.8,0.75
+mobile development,"Kotlin, Flutter, React Native",7.0,senior,App Developer,3,34.5,0.5,0.5,0.7,0.65
+data engineering,"Data Warehousing, ETL, Python",11.8,senior,Data Analyst,3,49.0,0.6,0.65,0.8,0.75
+web development,"Node.js, JavaScript, Vue.js",12.4,senior,Full Stack Developer,3,20.5,0.4,0.45,0.8,0.9
+devops,"AWS, CI/CD, Azure",4.1,mid,Cloud Engineer,2,15.5,0.2,0.2,0.9,0.85
+ai/ml engineering,"Computer Vision, PyTorch, Data Science",8.1,senior,ML Engineer,3,5.0,0.2,0.25,0.9,0.75
+ai/ml engineering,"PyTorch, NLP, Data Science",3.6,mid,ML Engineer,2,10.5,0.2,0.25,0.9,0.75
+mobile development,"React Native, Kotlin, Swift",9.7,senior,Frontend Developer,3,49.75,0.7,0.75,0.65,0.7
+web development,"Node.js, Vue.js, HTML/CSS",7.7,senior,Full Stack Developer,3,20.5,0.4,0.45,0.8,0.9
+ai/ml engineering,"NLP, TensorFlow, Computer Vision",4.4,mid,ML Engineer,2,10.5,0.2,0.25,0.9,0.75
+mobile development,"Flutter, Swift, React Native",8.1,senior,App Developer,3,34.5,0.5,0.5,0.7,0.65
+ai/ml engineering,"Python, PyTorch, Computer Vision",9.3,senior,ML Engineer,3,5.0,0.2,0.25,0.9,0.75
+data engineering,"ETL, BigQuery, SQL",3.3,mid,Data Analyst,2,70.0,0.6,0.65,0.8,0.75
+ai/ml engineering,"Computer Vision, PyTorch, NLP",14.0,senior,ML Engineer,3,5.0,0.2,0.25,0.9,0.75
+data engineering,"Data Warehousing, Spark, Python",9.0,senior,Data Analyst,3,49.0,0.6,0.65,0.8,0.75
+ai/ml engineering,"Data Science, Computer Vision, PyTorch",8.7,senior,ML Engineer,3,5.0,0.2,0.25,0.9,0.75
+ai/ml engineering,"NLP, Data Science, TensorFlow",3.3,mid,ML Engineer,2,10.5,0.2,0.25,0.9,0.75
+mobile development,"Kotlin, React Native, Android",6.2,senior,App Developer,3,34.5,0.5,0.5,0.7,0.65
+data engineering,"BigQuery, ETL, SQL",8.3,senior,Data Analyst,3,49.0,0.6,0.65,0.8,0.75
+web development,"Angular, Node.js, React",11.6,senior,Full Stack Developer,3,20.5,0.4,0.45,0.8,0.9
+data engineering,"Python, SQL, Spark",4.9,mid,Data Analyst,2,70.0,0.6,0.65,0.8,0.75
+data engineering,"SQL, Python, ETL",10.3,senior,Data Analyst,3,49.0,0.6,0.65,0.8,0.75
+mobile development,"Flutter, Kotlin, React Native",7.7,senior,App Developer,3,34.5,0.5,0.5,0.7,0.65
+web development,"Vue.js, React, Angular",6.9,senior,Frontend Developer,3,49.75,0.7,0.75,0.65,0.7
+web development,"Node.js, React, HTML/CSS",6.3,senior,Full Stack Developer,3,20.5,0.4,0.45,0.8,0.9
+web development,"React, Angular, Node.js",3.9,mid,Full Stack Developer,2,31.0,0.4,0.45,0.8,0.9
+ai/ml engineering,"Computer Vision, Python, TensorFlow",4.2,mid,ML Engineer,2,10.5,0.2,0.25,0.9,0.75
+web development,"Angular, JavaScript, Node.js",9.7,senior,Full Stack Developer,3,20.5,0.4,0.45,0.8,0.9
+data engineering,"Python, BigQuery, ETL",7.8,senior,Data Analyst,3,49.0,0.6,0.65,0.8,0.75
+data engineering,"BigQuery, ETL, Spark",1.9,junior,Data Analyst,1,84.0,0.6,0.65,0.8,0.75
+ai/ml engineering,"Python, NLP, PyTorch",2.8,mid,ML Engineer,2,10.5,0.2,0.25,0.9,0.75
+web development,"React, JavaScript, Vue.js",12.7,senior,Frontend Developer,3,49.75,0.7,0.75,0.65,0.7
+web development,"Angular, JavaScript, React",6.8,senior,Frontend Developer,3,49.75,0.7,0.75,0.65,0.7
+data engineering,"ETL, Data Warehousing, Python",5.7,senior,Data Analyst,3,49.0,0.6,0.65,0.8,0.75
+mobile development,"Flutter, Swift, Kotlin",8.4,senior,App Developer,3,34.5,0.5,0.5,0.7,0.65
+web development,"React, HTML/CSS, JavaScript",8.9,senior,Frontend Developer,3,49.75,0.7,0.75,0.65,0.7
+ai/ml engineering,"Computer Vision, Data Science, PyTorch",6.6,senior,ML Engineer,3,5.0,0.2,0.25,0.9,0.75
+data engineering,"SQL, ETL, Data Warehousing",8.6,senior,Data Analyst,3,49.0,0.6,0.65,0.8,0.75
+data engineering,"SQL, ETL, BigQuery",1.2,junior,Data Analyst,1,84.0,0.6,0.65,0.8,0.75
+web development,"JavaScript, React, Angular",6.3,senior,Frontend Developer,3,49.75,0.7,0.75,0.65,0.7
+data engineering,"ETL, Spark, Data Warehousing",9.8,senior,Data Analyst,3,49.0,0.6,0.65,0.8,0.75
+web development,"HTML/CSS, Angular, React",5.8,senior,Frontend Developer,3,49.75,0.7,0.75,0.65,0.7
+ai/ml engineering,"TensorFlow, Python, Data Science",12.4,senior,ML Engineer,3,5.0,0.2,0.25,0.9,0.75
+ai/ml engineering,"TensorFlow, Computer Vision, NLP",1.8,junior,ML Engineer,1,14.5,0.2,0.25,0.9,0.75
+ai/ml engineering,"PyTorch, NLP, Data Science",4.4,mid,ML Engineer,2,10.5,0.2,0.25,0.9,0.75
+web development,"Angular, JavaScript, HTML/CSS",3.5,mid,Frontend Developer,2,69.25,0.7,0.75,0.65,0.7
+web development,"Node.js, React, JavaScript",12.6,senior,Full Stack Developer,3,20.5,0.4,0.45,0.8,0.9
+web development,"React, JavaScript, HTML/CSS",0.7,junior,Frontend Developer,1,82.25,0.7,0.75,0.65,0.7
+web development,"Angular, Node.js, JavaScript",4.2,mid,Full Stack Developer,2,31.0,0.4,0.45,0.8,0.9
+web development,"Node.js, React, Angular",5.9,senior,Full Stack Developer,3,20.5,0.4,0.45,0.8,0.9
+ai/ml engineering,"Computer Vision, TensorFlow, Data Science",8.3,senior,ML Engineer,3,5.0,0.2,0.25,0.9,0.75
+data engineering,"Python, Spark, ETL",7.6,senior,Data Analyst,3,49.0,0.6,0.65,0.8,0.75
+mobile development,"Flutter, iOS, Android",5.2,senior,App Developer,3,34.5,0.5,0.5,0.7,0.65
+web development,"HTML/CSS, JavaScript, Angular",9.7,senior,Frontend Developer,3,49.75,0.7,0.75,0.65,0.7
+mobile development,"Android, iOS, Flutter",5.6,senior,App Developer,3,34.5,0.5,0.5,0.7,0.65
+data engineering,"Python, Spark, SQL",5.9,senior,Data Analyst,3,49.0,0.6,0.65,0.8,0.75
+mobile development,"React Native, Swift, Flutter",10.3,senior,App Developer,3,34.5,0.5,0.5,0.7,0.65
+web development,"HTML/CSS, Node.js, JavaScript",12.2,senior,Full Stack Developer,3,20.5,0.4,0.45,0.8,0.9
+web development,"HTML/CSS, Vue.js, React",6.5,senior,Frontend Developer,3,49.75,0.7,0.75,0.65,0.7
+mobile development,"Swift, Kotlin, Flutter",4.2,mid,App Developer,2,49.5,0.5,0.5,0.7,0.65
+data engineering,"Data Warehousing, SQL, ETL",5.9,senior,Data Analyst,3,49.0,0.6,0.65,0.8,0.75
+web development,"Angular, Vue.js, Node.js",4.9,mid,Full Stack Developer,2,31.0,0.4,0.45,0.8,0.9
+web development,"Node.js, Angular, React",5.2,senior,Full Stack Developer,3,20.5,0.4,0.45,0.8,0.9
+mobile development,"Kotlin, iOS, Android",7.8,senior,App Developer,3,34.5,0.5,0.5,0.7,0.65
+ai/ml engineering,"Computer Vision, NLP, Python",10.9,senior,ML Engineer,3,5.0,0.2,0.25,0.9,0.75
+data engineering,"ETL, BigQuery, Spark",3.6,mid,Data Analyst,2,70.0,0.6,0.65,0.8,0.75
+ai/ml engineering,"Computer Vision, NLP, TensorFlow",11.3,senior,ML Engineer,3,5.0,0.2,0.25,0.9,0.75
+data engineering,"Data Warehousing, BigQuery, SQL",4.2,mid,Data Analyst,2,70.0,0.6,0.65,0.8,0.75
+ai/ml engineering,"TensorFlow, NLP, Computer Vision",1.5,junior,ML Engineer,1,14.5,0.2,0.25,0.9,0.75
+data engineering,"BigQuery, Spark, Python",4.4,mid,Data Analyst,2,70.0,0.6,0.65,0.8,0.75
+ai/ml engineering,"Data Science, NLP, Python",3.5,mid,ML Engineer,2,10.5,0.2,0.25,0.9,0.75
+ai/ml engineering,"Data Science, NLP, PyTorch",11.5,senior,ML Engineer,3,5.0,0.2,0.25,0.9,0.75
+data engineering,"ETL, SQL, Data Warehousing",5.0,mid,Data Analyst,2,70.0,0.6,0.65,0.8,0.75
+web development,"Vue.js, JavaScript, React",1.1,junior,Frontend Developer,1,82.25,0.7,0.75,0.65,0.7
+data engineering,"Spark, SQL, Data Warehousing",6.1,senior,Data Analyst,3,49.0,0.6,0.65,0.8,0.75
+web development,"Angular, React, Node.js",11.3,senior,Full Stack Developer,3,20.5,0.4,0.45,0.8,0.9
+web development,"HTML/CSS, Angular, Node.js",2.8,mid,Full Stack Developer,2,31.0,0.4,0.45,0.8,0.9
+data engineering,"ETL, SQL, Data Warehousing",4.9,mid,Data Analyst,2,70.0,0.6,0.65,0.8,0.75
+ai/ml engineering,"Computer Vision, NLP, Data Science",5.1,senior,ML Engineer,3,5.0,0.2,0.25,0.9,0.75
+data engineering,"SQL, BigQuery, Spark",4.0,mid,Data Analyst,2,70.0,0.6,0.65,0.8,0.75
+ai/ml engineering,"TensorFlow, NLP, Data Science",8.4,senior,ML Engineer,3,5.0,0.2,0.25,0.9,0.75
+web development,"Vue.js, React, JavaScript",3.4,mid,Frontend Developer,2,69.25,0.7,0.75,0.65,0.7
+ai/ml engineering,"Python, NLP, PyTorch",3.7,mid,ML Engineer,2,10.5,0.2,0.25,0.9,0.75
+mobile development,"Flutter, Android, Swift",4.1,mid,App Developer,2,49.5,0.5,0.5,0.7,0.65
+data engineering,"SQL, Python, BigQuery",9.5,senior,Data Analyst,3,49.0,0.6,0.65,0.8,0.75
+web development,"Vue.js, Angular, HTML/CSS",5.9,senior,Frontend Developer,3,49.75,0.7,0.75,0.65,0.7
+web development,"Angular, JavaScript, Vue.js",5.5,senior,Frontend Developer,3,49.75,0.7,0.75,0.65,0.7
+web development,"JavaScript, Vue.js, Node.js",11.3,senior,Full Stack Developer,3,20.5,0.4,0.45,0.8,0.9
+ai/ml engineering,"Python, Data Science, TensorFlow",5.4,senior,ML Engineer,3,5.0,0.2,0.25,0.9,0.75
+mobile development,"iOS, Kotlin, Android",5.4,senior,App Developer,3,34.5,0.5,0.5,0.7,0.65
+mobile development,"Swift, Flutter, iOS",7.3,senior,App Developer,3,34.5,0.5,0.5,0.7,0.65
+ai/ml engineering,"TensorFlow, NLP, Computer Vision",5.7,senior,ML Engineer,3,5.0,0.2,0.25,0.9,0.75
+mobile development,"iOS, Swift, Kotlin",6.6,senior,App Developer,3,34.5,0.5,0.5,0.7,0.65
+web development,"JavaScript, React, Node.js",2.2,mid,Full Stack Developer,2,31.0,0.4,0.45,0.8,0.9
+ai/ml engineering,"NLP, TensorFlow, Python",2.5,mid,ML Engineer,2,10.5,0.2,0.25,0.9,0.75
+web development,"HTML/CSS, Vue.js, Angular",1.2,junior,Frontend Developer,1,82.25,0.7,0.75,0.65,0.7
+web development,"HTML/CSS, JavaScript, React",9.3,senior,Frontend Developer,3,49.75,0.7,0.75,0.65,0.7
+data engineering,"ETL, Data Warehousing, SQL",10.2,senior,Data Analyst,3,49.0,0.6,0.65,0.8,0.75
+data engineering,"ETL, Spark, Python",6.3,senior,Data Analyst,3,49.0,0.6,0.65,0.8,0.75
+mobile development,"iOS, Flutter, React Native",1.7,junior,App Developer,1,59.5,0.5,0.5,0.7,0.65
+web development,"Vue.js, JavaScript, Angular",5.8,senior,Frontend Developer,3,49.75,0.7,0.75,0.65,0.7
+data engineering,"SQL, Data Warehousing, ETL",5.0,mid,Data Analyst,2,70.0,0.6,0.65,0.8,0.75
+mobile development,"iOS, Android, Flutter",1.6,junior,App Developer,1,59.5,0.5,0.5,0.7,0.65
+mobile development,"Kotlin, iOS, React Native",1.4,junior,App Developer,1,59.5,0.5,0.5,0.7,0.65
+ai/ml engineering,"Computer Vision, Python, TensorFlow",6.3,senior,ML Engineer,3,5.0,0.2,0.25,0.9,0.75
+web development,"HTML/CSS, Angular, Node.js",7.2,senior,Full Stack Developer,3,20.5,0.4,0.45,0.8,0.9
+web development,"Node.js, JavaScript, React",2.0,junior,Full Stack Developer,1,38.0,0.4,0.45,0.8,0.9
+mobile development,"React Native, Android, Swift",3.6,mid,App Developer,2,49.5,0.5,0.5,0.7,0.65
+ai/ml engineering,"PyTorch, TensorFlow, NLP",4.6,mid,ML Engineer,2,10.5,0.2,0.25,0.9,0.75
+mobile development,"React Native, Android, Kotlin",3.9,mid,App Developer,2,49.5,0.5,0.5,0.7,0.65
+data engineering,"Data Warehousing, BigQuery, SQL",4.5,mid,Data Analyst,2,70.0,0.6,0.65,0.8,0.75
+data engineering,"Python, SQL, BigQuery",4.3,mid,Data Analyst,2,70.0,0.6,0.65,0.8,0.75
+ai/ml engineering,"NLP, Computer Vision, TensorFlow",11.5,senior,ML Engineer,3,5.0,0.2,0.25,0.9,0.75
+mobile development,"Swift, Kotlin, Android",4.5,mid,App Developer,2,49.5,0.5,0.5,0.7,0.65
+web development,"Vue.js, React, Node.js",3.2,mid,Full Stack Developer,2,31.0,0.4,0.45,0.8,0.9
+web development,"JavaScript, Angular, Node.js",5.1,senior,Full Stack Developer,3,20.5,0.4,0.45,0.8,0.9
+web development,"Vue.js, JavaScript, React",6.0,senior,Frontend Developer,3,49.75,0.7,0.75,0.65,0.7
+web development,"Vue.js, React, Node.js",4.8,mid,Full Stack Developer,2,31.0,0.4,0.45,0.8,0.9
+data engineering,"ETL, BigQuery, Data Warehousing",6.4,senior,Data Analyst,3,49.0,0.6,0.65,0.8,0.75
+web development,"Vue.js, JavaScript, Angular",6.5,senior,Frontend Developer,3,49.75,0.7,0.75,0.65,0.7
+web development,"React, Node.js, Vue.js",7.1,senior,Full Stack Developer,3,20.5,0.4,0.45,0.8,0.9
+web development,"React, Node.js, HTML/CSS",7.8,senior,Full Stack Developer,3,20.5,0.4,0.45,0.8,0.9
+mobile development,"iOS, Flutter, React Native",7.7,senior,App Developer,3,34.5,0.5,0.5,0.7,0.65
+web development,"Angular, HTML/CSS, Vue.js",7.2,senior,Frontend Developer,3,49.75,0.7,0.75,0.65,0.7
+mobile development,"Swift, Android, Kotlin",9.4,senior,App Developer,3,34.5,0.5,0.5,0.7,0.65
+web development,"JavaScript, HTML/CSS, Vue.js",3.2,mid,Frontend Developer,2,69.25,0.7,0.75,0.65,0.7
+web development,"JavaScript, React, Vue.js",6.2,senior,Frontend Developer,3,49.75,0.7,0.75,0.65,0.7
+data engineering,"Data Warehousing, ETL, BigQuery",5.8,senior,Data Analyst,3,49.0,0.6,0.65,0.8,0.75
+data engineering,"Spark, SQL, Data Warehousing",6.6,senior,Data Analyst,3,49.0,0.6,0.65,0.8,0.75
+ai/ml engineering,"Python, PyTorch, Computer Vision",7.1,senior,ML Engineer,3,5.0,0.2,0.25,0.9,0.75
+ai/ml engineering,"TensorFlow, Data Science, PyTorch",10.8,senior,ML Engineer,3,5.0,0.2,0.25,0.9,0.75
+mobile development,"iOS, Flutter, Kotlin",9.5,senior,App Developer,3,34.5,0.5,0.5,0.7,0.65
+data engineering,"Spark, Data Warehousing, BigQuery",7.1,senior,Data Analyst,3,49.0,0.6,0.65,0.8,0.75
+devops,"CI/CD, Azure, AWS",5.5,senior,Cloud Engineer,3,8.0,0.2,0.2,0.9,0.85
+ai/ml engineering,"TensorFlow, Python, PyTorch",1.1,junior,ML Engineer,1,14.5,0.2,0.25,0.9,0.75
+web development,"Vue.js, Angular, React",6.6,senior,Frontend Developer,3,49.75,0.7,0.75,0.65,0.7
+mobile development,"React Native, Android, Flutter",1.8,junior,App Developer,1,59.5,0.5,0.5,0.7,0.65
+web development,"HTML/CSS, Node.js, JavaScript",5.9,senior,Full Stack Developer,3,20.5,0.4,0.45,0.8,0.9
+mobile development,"Flutter, Kotlin, iOS",6.0,senior,App Developer,3,34.5,0.5,0.5,0.7,0.65
+web development,"Vue.js, HTML/CSS, React",1.7,junior,Frontend Developer,1,82.25,0.7,0.75,0.65,0.7
+mobile development,"iOS, Kotlin, Swift",10.6,senior,App Developer,3,34.5,0.5,0.5,0.7,0.65
+data engineering,"ETL, SQL, Python",5.3,senior,Data Analyst,3,49.0,0.6,0.65,0.8,0.75
+data engineering,"Data Warehousing, Spark, ETL",1.5,junior,Data Analyst,1,84.0,0.6,0.65,0.8,0.75
+web development,"React, JavaScript, Angular",5.0,mid,Frontend Developer,2,69.25,0.7,0.75,0.65,0.7
+mobile development,"Flutter, Kotlin, Android",4.4,mid,App Developer,2,49.5,0.5,0.5,0.7,0.65
+ai/ml engineering,"Python, Computer Vision, TensorFlow",2.5,mid,ML Engineer,2,10.5,0.2,0.25,0.9,0.75
+data engineering,"SQL, ETL, Python",3.3,mid,Data Analyst,2,70.0,0.6,0.65,0.8,0.75
+ai/ml engineering,"TensorFlow, Data Science, Computer Vision",8.2,senior,ML Engineer,3,5.0,0.2,0.25,0.9,0.75
+ai/ml engineering,"Python, NLP, PyTorch",7.4,senior,ML Engineer,3,5.0,0.2,0.25,0.9,0.75
+cybersecurity,"Security Audit, Cryptography, Network Security",4.8,mid,Cybersecurity Engineer,2,37.75,0.1,0.1,0.95,0.7
+cybersecurity,"Cryptography, Network Security, Security Audit",9.0,senior,Cybersecurity Engineer,3,22.75,0.1,0.1,0.95,0.7
+cybersecurity,"Cryptography, Network Security, Penetration Testing",5.3,senior,Cybersecurity Engineer,3,22.75,0.1,0.1,0.95,0.7
+cybersecurity,"Penetration Testing, Network Security, Cryptography",4.7,mid,Cybersecurity Engineer,2,37.75,0.1,0.1,0.95,0.7
+cybersecurity,"Network Security, Penetration Testing, Cryptography",5.5,senior,Cybersecurity Engineer,3,22.75,0.1,0.1,0.95,0.7
+cybersecurity,"Network Security, Penetration Testing, Security Audit",11.9,senior,Cybersecurity Engineer,3,22.75,0.1,0.1,0.95,0.7
+cybersecurity,"Network Security, Security Audit, Cryptography",8.7,senior,Cybersecurity Engineer,3,22.75,0.1,0.1,0.95,0.7
+cybersecurity,"Network Security, Cryptography, Penetration Testing",6.1,senior,Cybersecurity Engineer,3,22.75,0.1,0.1,0.95,0.7
+cybersecurity,"Network Security, Penetration Testing, Cryptography",7.9,senior,Cybersecurity Engineer,3,22.75,0.1,0.1,0.95,0.7
+cybersecurity,"Penetration Testing, Network Security, Security Audit",6.3,senior,Cybersecurity Engineer,3,22.75,0.1,0.1,0.95,0.7
+cybersecurity,"Penetration Testing, Security Audit, Network Security",10.0,senior,Cybersecurity Engineer,3,22.75,0.1,0.1,0.95,0.7
+cybersecurity,"Network Security, Security Audit, Penetration Testing",7.0,senior,Cybersecurity Engineer,3,22.75,0.1,0.1,0.95,0.7
+cybersecurity,"Network Security, Penetration Testing, Cryptography",6.2,senior,Cybersecurity Engineer,3,22.75,0.1,0.1,0.95,0.7
+cybersecurity,"Penetration Testing, Cryptography, Network Security",5.8,senior,Cybersecurity Engineer,3,22.75,0.1,0.1,0.95,0.7
+cybersecurity,"Network Security, Cryptography, Penetration Testing",2.1,mid,Cybersecurity Engineer,2,37.75,0.1,0.1,0.95,0.7
+cybersecurity,"Penetration Testing, Security Audit, Cryptography",2.1,mid,Cybersecurity Engineer,2,37.75,0.1,0.1,0.95,0.7
+cybersecurity,"Cryptography, Network Security, Security Audit",2.7,mid,Cybersecurity Engineer,2,37.75,0.1,0.1,0.95,0.7
+cybersecurity,"Penetration Testing, Cryptography, Network Security",4.3,mid,Cybersecurity Engineer,2,37.75,0.1,0.1,0.95,0.7
+cybersecurity,"Security Audit, Penetration Testing, Cryptography",5.6,senior,Cybersecurity Engineer,3,22.75,0.1,0.1,0.95,0.7
+cybersecurity,"Cryptography, Security Audit, Network Security",5.1,senior,Cybersecurity Engineer,3,22.75,0.1,0.1,0.95,0.7
+cybersecurity,"Network Security, Security Audit, Cryptography",7.0,senior,Cybersecurity Engineer,3,22.75,0.1,0.1,0.95,0.7
+cybersecurity,"Cryptography, Penetration Testing, Security Audit",10.6,senior,Cybersecurity Engineer,3,22.75,0.1,0.1,0.95,0.7
+cybersecurity,"Penetration Testing, Network Security, Security Audit",3.9,mid,Cybersecurity Engineer,2,37.75,0.1,0.1,0.95,0.7
+cybersecurity,"Penetration Testing, Cryptography, Network Security",2.0,junior,Cybersecurity Engineer,1,47.75,0.1,0.1,0.95,0.7
+cybersecurity,"Cryptography, Network Security, Penetration Testing",3.4,mid,Cybersecurity Engineer,2,37.75,0.1,0.1,0.95,0.7
+cybersecurity,"Security Audit, Penetration Testing, Cryptography",4.4,mid,Cybersecurity Engineer,2,37.75,0.1,0.1,0.95,0.7
+cybersecurity,"Network Security, Cryptography, Security Audit",3.7,mid,Cybersecurity Engineer,2,37.75,0.1,0.1,0.95,0.7
+cybersecurity,"Network Security, Penetration Testing, Cryptography",4.8,mid,Cybersecurity Engineer,2,37.75,0.1,0.1,0.95,0.7
+cybersecurity,"Security Audit, Cryptography, Penetration Testing",12.2,senior,Cybersecurity Engineer,3,22.75,0.1,0.1,0.95,0.7
+cybersecurity,"Penetration Testing, Network Security, Security Audit",7.7,senior,Cybersecurity Engineer,3,22.75,0.1,0.1,0.95,0.7
+cybersecurity,"Cryptography, Network Security, Security Audit",9.0,senior,Cybersecurity Engineer,3,22.75,0.1,0.1,0.95,0.7
+cybersecurity,"Network Security, Cryptography, Penetration Testing",5.4,senior,Cybersecurity Engineer,3,22.75,0.1,0.1,0.95,0.7
+cybersecurity,"Security Audit, Network Security, Cryptography",6.1,senior,Cybersecurity Engineer,3,22.75,0.1,0.1,0.95,0.7
+cybersecurity,"Security Audit, Penetration Testing, Cryptography",4.8,mid,Cybersecurity Engineer,2,37.75,0.1,0.1,0.95,0.7
+cybersecurity,"Cryptography, Penetration Testing, Network Security",10.0,senior,Cybersecurity Engineer,3,22.75,0.1,0.1,0.95,0.7
+cybersecurity,"Cryptography, Penetration Testing, Security Audit",6.5,senior,Cybersecurity Engineer,3,22.75,0.1,0.1,0.95,0.7
+cybersecurity,"Network Security, Cryptography, Penetration Testing",3.8,mid,Cybersecurity Engineer,2,37.75,0.1,0.1,0.95,0.7
+cybersecurity,"Network Security, Penetration Testing, Cryptography",5.6,senior,Cybersecurity Engineer,3,22.75,0.1,0.1,0.95,0.7
+cybersecurity,"Cryptography, Penetration Testing, Security Audit",5.0,mid,Cybersecurity Engineer,2,37.75,0.1,0.1,0.95,0.7
+cybersecurity,"Security Audit, Penetration Testing, Cryptography",4.4,mid,Cybersecurity Engineer,2,37.75,0.1,0.1,0.95,0.7
+cybersecurity,"Cryptography, Penetration Testing, Security Audit",0.9,junior,Cybersecurity Engineer,1,47.75,0.1,0.1,0.95,0.7
+cybersecurity,"Network Security, Security Audit, Cryptography",1.2,junior,Cybersecurity Engineer,1,47.75,0.1,0.1,0.95,0.7
+cybersecurity,"Cryptography, Penetration Testing, Security Audit",2.3,mid,Cybersecurity Engineer,2,37.75,0.1,0.1,0.95,0.7
+cybersecurity,"Security Audit, Penetration Testing, Network Security",10.7,senior,Cybersecurity Engineer,3,22.75,0.1,0.1,0.95,0.7
+cybersecurity,"Network Security, Penetration Testing, Security Audit",5.9,senior,Cybersecurity Engineer,3,22.75,0.1,0.1,0.95,0.7
+cybersecurity,"Penetration Testing, Network Security, Security Audit",3.8,mid,Cybersecurity Engineer,2,37.75,0.1,0.1,0.95,0.7
+cybersecurity,"Security Audit, Cryptography, Penetration Testing",5.0,mid,Cybersecurity Engineer,2,37.75,0.1,0.1,0.95,0.7
+cybersecurity,"Cryptography, Security Audit, Penetration Testing",7.3,senior,Cybersecurity Engineer,3,22.75,0.1,0.1,0.95,0.7
+cybersecurity,"Penetration Testing, Security Audit, Cryptography",6.2,senior,Cybersecurity Engineer,3,22.75,0.1,0.1,0.95,0.7
+cybersecurity,"Security Audit, Cryptography, Penetration Testing",3.9,mid,Cybersecurity Engineer,2,37.75,0.1,0.1,0.95,0.7
+devops,"Terraform, Azure, CI/CD",1.2,junior,DevOps Engineer,1,21.25,0.2,0.2,0.85,0.85
+devops,"AWS, Azure, Kubernetes",5.5,senior,DevOps Engineer,3,8.75,0.2,0.2,0.85,0.85
+devops,"Docker, AWS, Azure",3.2,mid,DevOps Engineer,2,16.25,0.2,0.2,0.85,0.85
+devops,"Terraform, Azure, AWS",8.9,senior,DevOps Engineer,3,8.75,0.2,0.2,0.85,0.85
+devops,"Azure, Docker, Terraform",9.3,senior,DevOps Engineer,3,8.75,0.2,0.2,0.85,0.85
+devops,"Docker, Terraform, AWS",1.5,junior,DevOps Engineer,1,21.25,0.2,0.2,0.85,0.85
+devops,"Kubernetes, Azure, AWS",2.4,mid,DevOps Engineer,2,16.25,0.2,0.2,0.85,0.85
+devops,"AWS, Terraform, Kubernetes",6.9,senior,DevOps Engineer,3,8.75,0.2,0.2,0.85,0.85
+devops,"Kubernetes, Terraform, AWS",7.1,senior,DevOps Engineer,3,8.75,0.2,0.2,0.85,0.85
+devops,"Azure, Kubernetes, CI/CD",12.4,senior,DevOps Engineer,3,8.75,0.2,0.2,0.85,0.85
+devops,"CI/CD, Terraform, Azure",8.8,senior,DevOps Engineer,3,8.75,0.2,0.2,0.85,0.85
+devops,"CI/CD, Terraform, Docker",4.8,mid,DevOps Engineer,2,16.25,0.2,0.2,0.85,0.85
+devops,"Kubernetes, Azure, CI/CD",0.7,junior,DevOps Engineer,1,21.25,0.2,0.2,0.85,0.85
+devops,"Azure, AWS, Terraform",0.6,junior,DevOps Engineer,1,21.25,0.2,0.2,0.85,0.85
+devops,"AWS, Terraform, Kubernetes",0.7,junior,DevOps Engineer,1,21.25,0.2,0.2,0.85,0.85
+devops,"Kubernetes, CI/CD, Terraform",0.9,junior,DevOps Engineer,1,21.25,0.2,0.2,0.85,0.85
+devops,"Azure, Docker, AWS",13.5,senior,DevOps Engineer,3,8.75,0.2,0.2,0.85,0.85
+devops,"Kubernetes, Azure, CI/CD",6.1,senior,DevOps Engineer,3,8.75,0.2,0.2,0.85,0.85
+devops,"CI/CD, AWS, Kubernetes",1.0,junior,DevOps Engineer,1,21.25,0.2,0.2,0.85,0.85
+devops,"CI/CD, AWS, Terraform",3.9,mid,DevOps Engineer,2,16.25,0.2,0.2,0.85,0.85
+devops,"Kubernetes, Azure, CI/CD",4.9,mid,DevOps Engineer,2,16.25,0.2,0.2,0.85,0.85
+devops,"Azure, CI/CD, Docker",4.3,mid,DevOps Engineer,2,16.25,0.2,0.2,0.85,0.85
+devops,"CI/CD, Kubernetes, Azure",5.4,senior,DevOps Engineer,3,8.75,0.2,0.2,0.85,0.85
+devops,"Kubernetes, Terraform, AWS",3.9,mid,DevOps Engineer,2,16.25,0.2,0.2,0.85,0.85
+devops,"Azure, CI/CD, Docker",5.8,senior,DevOps Engineer,3,8.75,0.2,0.2,0.85,0.85
+devops,"Terraform, CI/CD, Docker",3.1,mid,DevOps Engineer,2,16.25,0.2,0.2,0.85,0.85
+devops,"Kubernetes, AWS, Docker",9.8,senior,DevOps Engineer,3,8.75,0.2,0.2,0.85,0.85
+devops,"Terraform, AWS, Docker",5.2,senior,DevOps Engineer,3,8.75,0.2,0.2,0.85,0.85
+devops,"Kubernetes, CI/CD, Terraform",2.4,mid,DevOps Engineer,2,16.25,0.2,0.2,0.85,0.85
+devops,"Terraform, Azure, CI/CD",2.4,mid,DevOps Engineer,2,16.25,0.2,0.2,0.85,0.85
+devops,"Docker, Kubernetes, CI/CD",3.2,mid,DevOps Engineer,2,16.25,0.2,0.2,0.85,0.85
+devops,"Kubernetes, Terraform, AWS",2.3,mid,DevOps Engineer,2,16.25,0.2,0.2,0.85,0.85
+devops,"Kubernetes, Azure, AWS",6.2,senior,DevOps Engineer,3,8.75,0.2,0.2,0.85,0.85
+devops,"Docker, Terraform, Kubernetes",6.0,senior,DevOps Engineer,3,8.75,0.2,0.2,0.85,0.85
+devops,"Azure, Kubernetes, CI/CD",7.5,senior,DevOps Engineer,3,8.75,0.2,0.2,0.85,0.85
+devops,"Terraform, Azure, Kubernetes",5.0,mid,DevOps Engineer,2,16.25,0.2,0.2,0.85,0.85
+devops,"Azure, Docker, Kubernetes",8.8,senior,DevOps Engineer,3,8.75,0.2,0.2,0.85,0.85
+devops,"Terraform, CI/CD, AWS",6.7,senior,DevOps Engineer,3,8.75,0.2,0.2,0.85,0.85
+devops,"CI/CD, Terraform, Kubernetes",2.3,mid,DevOps Engineer,2,16.25,0.2,0.2,0.85,0.85
+devops,"Kubernetes, AWS, Docker",6.2,senior,DevOps Engineer,3,8.75,0.2,0.2,0.85,0.85
+devops,"CI/CD, Docker, AWS",6.5,senior,DevOps Engineer,3,8.75,0.2,0.2,0.85,0.85
+devops,"Docker, Kubernetes, Azure",8.1,senior,DevOps Engineer,3,8.75,0.2,0.2,0.85,0.85
+devops,"AWS, CI/CD, Terraform",2.5,mid,DevOps Engineer,2,16.25,0.2,0.2,0.85,0.85
+devops,"Kubernetes, Docker, CI/CD",2.9,mid,DevOps Engineer,2,16.25,0.2,0.2,0.85,0.85
+devops,"Kubernetes, Docker, CI/CD",3.6,mid,DevOps Engineer,2,16.25,0.2,0.2,0.85,0.85
+devops,"AWS, CI/CD, Kubernetes",8.8,senior,DevOps Engineer,3,8.75,0.2,0.2,0.85,0.85
+devops,"Kubernetes, CI/CD, AWS",12.0,senior,DevOps Engineer,3,8.75,0.2,0.2,0.85,0.85
+devops,"Docker, Kubernetes, Terraform",6.4,senior,DevOps Engineer,3,8.75,0.2,0.2,0.85,0.85
+devops,"Terraform, CI/CD, Azure",8.4,senior,DevOps Engineer,3,8.75,0.2,0.2,0.85,0.85
+devops,"Docker, AWS, Terraform",2.9,mid,DevOps Engineer,2,16.25,0.2,0.2,0.85,0.85
+devops,"Docker, Terraform, CI/CD",2.6,mid,DevOps Engineer,2,16.25,0.2,0.2,0.85,0.85
+devops,"CI/CD, Terraform, Azure",3.4,mid,DevOps Engineer,2,16.25,0.2,0.2,0.85,0.85
+devops,"Azure, AWS, Terraform",3.4,mid,DevOps Engineer,2,16.25,0.2,0.2,0.85,0.85
+devops,"Kubernetes, Docker, AWS",6.3,senior,DevOps Engineer,3,8.75,0.2,0.2,0.85,0.85
+devops,"AWS, Azure, Kubernetes",4.2,mid,DevOps Engineer,2,16.25,0.2,0.2,0.85,0.85
+software development,"node, express, mongodb",3.0,mid,Backend Developer,2,43.75,0.5,0.55,0.75,0.8
+software development,"node, nestjs, mysql",3.0,mid,Backend Developer,2,43.75,0.5,0.55,0.75,0.8
+software development,"java, springboot, mysql",3.0,mid,Backend Developer,2,43.75,0.5,0.55,0.75,0.8
+software development,"springboot, kafka, oracle",3.0,mid,Backend Developer,2,43.75,0.5,0.55,0.75,0.8
+software development,"django, postgresql, api",3.0,mid,Backend Developer,2,43.75,0.5,0.55,0.75,0.8
+software development,"flask, mysql, api",3.0,mid,Backend Developer,2,43.75,0.5,0.55,0.75,0.8
+software development,"fastapi, redis, api",3.0,mid,Backend Developer,2,43.75,0.5,0.55,0.75,0.8
+software development,"laravel, mysql, api",3.0,mid,Backend Developer,2,43.75,0.5,0.55,0.75,0.8
+software development,"php, symfony, mysql",3.0,mid,Backend Developer,2,43.75,0.5,0.55,0.75,0.8
+software development,"dotnet, aspnet, sqlserver",3.0,mid,Backend Developer,2,43.75,0.5,0.55,0.75,0.8
+software development,"golang, microservices, mongodb",3.0,mid,Backend Developer,2,43.75,0.5,0.55,0.75,0.8
+software development,"nestjs, graphql, postgres",3.0,mid,Backend Developer,2,43.75,0.5,0.55,0.75,0.8
+software development,"express, jwt authentication",3.0,mid,Backend Developer,2,43.75,0.5,0.55,0.75,0.8
+software development,"spring, rest api, mysql",3.0,mid,Backend Developer,2,43.75,0.5,0.55,0.75,0.8
+software development,"django, celery, redis",3.0,mid,Backend Developer,2,43.75,0.5,0.55,0.75,0.8
+software development,"node, graphql, redis",3.0,mid,Backend Developer,2,43.75,0.5,0.55,0.75,0.8
+software development,"java, microservices, kafka",3.0,mid,Backend Developer,2,43.75,0.5,0.55,0.75,0.8
+software development,"fastapi, postgresql",3.0,mid,Backend Developer,2,43.75,0.5,0.55,0.75,0.8
+software development,"mysql, stored procedures",3.0,mid,Backend Developer,2,43.75,0.5,0.55,0.75,0.8
+software development,"postgresql, tuning",3.0,mid,Backend Developer,2,43.75,0.5,0.55,0.75,0.8
+software development,"mongodb, aggregation",3.0,mid,Backend Developer,2,43.75,0.5,0.55,0.75,0.8
+software development,"springboot, hibernate",3.0,mid,Backend Developer,2,43.75,0.5,0.55,0.75,0.8
+software development,"flask, sqlalchemy",3.0,mid,Backend Developer,2,43.75,0.5,0.55,0.75,0.8
+software development,"node, redis, api",3.0,mid,Backend Developer,2,43.75,0.5,0.55,0.75,0.8
+software development,"django, api, mysql",3.0,mid,Backend Developer,2,43.75,0.5,0.55,0.75,0.8
+software development,"laravel, redis",3.0,mid,Backend Developer,2,43.75,0.5,0.55,0.75,0.8
+software development,"aspnet, core, webapi",3.0,mid,Backend Developer,2,43.75,0.5,0.55,0.75,0.8
+blockchain,"Ethereum, Smart Contracts, Solidity",5.1,senior,Blockchain Developer,3,59.0,0.6,0.6,0.6,0.6
+blockchain,"Smart Contracts, Ethereum, Web3",2.5,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain,"Web3, Ethereum, DeFi",6.5,senior,Blockchain Developer,3,59.0,0.6,0.6,0.6,0.6
+blockchain,"DeFi, Solidity, Smart Contracts",10.9,senior,Blockchain Developer,3,59.0,0.6,0.6,0.6,0.6
+blockchain,"Smart Contracts, DeFi, Ethereum",7.4,senior,Blockchain Developer,3,59.0,0.6,0.6,0.6,0.6
+blockchain,"Web3, Solidity, Ethereum",8.5,senior,Blockchain Developer,3,59.0,0.6,0.6,0.6,0.6
+blockchain,"Ethereum, Solidity, DeFi",7.8,senior,Blockchain Developer,3,59.0,0.6,0.6,0.6,0.6
+blockchain,"Smart Contracts, Solidity, Ethereum",4.4,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain,"Ethereum, Smart Contracts, Solidity",9.2,senior,Blockchain Developer,3,59.0,0.6,0.6,0.6,0.6
+blockchain,"Ethereum, Web3, Solidity",4.8,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain,"Web3, Solidity, Ethereum",4.4,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain,"Smart Contracts, Ethereum, Web3",1.7,junior,Blockchain Developer,1,95.0,0.6,0.6,0.6,0.6
+blockchain,"Web3, Ethereum, Smart Contracts",3.8,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain,"Smart Contracts, Solidity, Ethereum",7.2,senior,Blockchain Developer,3,59.0,0.6,0.6,0.6,0.6
+blockchain,"DeFi, Ethereum, Smart Contracts",2.9,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain,"Solidity, Smart Contracts, Web3",3.2,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain,"Ethereum, Web3, Solidity",8.8,senior,Blockchain Developer,3,59.0,0.6,0.6,0.6,0.6
+blockchain,"DeFi, Web3, Smart Contracts",7.1,senior,Blockchain Developer,3,59.0,0.6,0.6,0.6,0.6
+blockchain,"Web3, Smart Contracts, DeFi",7.0,senior,Blockchain Developer,3,59.0,0.6,0.6,0.6,0.6
+blockchain,"Smart Contracts, Web3, Solidity",10.4,senior,Blockchain Developer,3,59.0,0.6,0.6,0.6,0.6
+blockchain,"Ethereum, Solidity, DeFi",4.9,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain,"DeFi, Ethereum, Smart Contracts",6.4,senior,Blockchain Developer,3,59.0,0.6,0.6,0.6,0.6
+blockchain,"Web3, DeFi, Smart Contracts",10.0,senior,Blockchain Developer,3,59.0,0.6,0.6,0.6,0.6
+blockchain,"DeFi, Web3, Smart Contracts",4.5,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain,"Ethereum, Smart Contracts, Web3",9.4,senior,Blockchain Developer,3,59.0,0.6,0.6,0.6,0.6
+blockchain,"Ethereum, Smart Contracts, Web3",10.6,senior,Blockchain Developer,3,59.0,0.6,0.6,0.6,0.6
+blockchain,"Smart Contracts, Solidity, DeFi",10.9,senior,Blockchain Developer,3,59.0,0.6,0.6,0.6,0.6
+blockchain,"Solidity, Smart Contracts, DeFi",3.1,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain,"Ethereum, Smart Contracts, Web3",9.5,senior,Blockchain Developer,3,59.0,0.6,0.6,0.6,0.6
+blockchain,"DeFi, Solidity, Web3",12.3,senior,Blockchain Developer,3,59.0,0.6,0.6,0.6,0.6
+blockchain,"Ethereum, Web3, Smart Contracts",3.5,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain,"Smart Contracts, Web3, Ethereum",6.7,senior,Blockchain Developer,3,59.0,0.6,0.6,0.6,0.6
+blockchain,"Smart Contracts, DeFi, Solidity",4.8,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain,"Solidity, Ethereum, Web3",1.9,junior,Blockchain Developer,1,95.0,0.6,0.6,0.6,0.6
+blockchain,"Solidity, Ethereum, Smart Contracts",3.4,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain,"Ethereum, Solidity, Web3",7.3,senior,Blockchain Developer,3,59.0,0.6,0.6,0.6,0.6
+blockchain,"Solidity, Smart Contracts, Web3",6.2,senior,Blockchain Developer,3,59.0,0.6,0.6,0.6,0.6
+blockchain,"Solidity, Smart Contracts, Ethereum",2.3,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain,"Solidity, Smart Contracts, DeFi",4.5,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain,"Solidity, DeFi, Ethereum",1.3,junior,Blockchain Developer,1,95.0,0.6,0.6,0.6,0.6
+blockchain,"Smart Contracts, DeFi, Ethereum",4.7,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain,"Web3, DeFi, Ethereum",8.4,senior,Blockchain Developer,3,59.0,0.6,0.6,0.6,0.6
+blockchain,"Ethereum, Solidity, DeFi",3.2,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain,"DeFi, Web3, Ethereum",3.6,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain,"Web3, Smart Contracts, Solidity",4.3,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain,"Ethereum, Solidity, Smart Contracts",10.8,senior,Blockchain Developer,3,59.0,0.6,0.6,0.6,0.6
+blockchain development,"solidity, ethereum, smart contract",3.0,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain development,"web3, solidity, defi",3.0,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain development,"ethereum, blockchain, crypto",3.0,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain development,"smart contract, polygon, web3",3.0,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain development,"solidity, nft, ethereum",3.0,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain development,"web3, metamask, solidity",3.0,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain development,"crypto, blockchain, defi",3.0,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain development,"ethereum, truffle, smart contract",3.0,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain development,"web3, solidity, polygon",3.0,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain development,"blockchain, crypto wallet",3.0,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain development,"solidity, hardhat, ethereum",3.0,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain development,"smart contract, web3",3.0,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain development,"ethereum, nft, solidity",3.0,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain development,"defi, blockchain",3.0,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6
+blockchain development,"crypto, web3, ethereum",3.0,mid,Blockchain Developer,2,83.0,0.6,0.6,0.6,0.6

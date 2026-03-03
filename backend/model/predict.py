@@ -1,14 +1,14 @@
 import joblib
 import os
-import scipy.sparse as sp
 
 
 # ===============================
-# LOAD MODEL
+# LOAD MODEL (optional - not dominating logic)
 # ===============================
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+print("🔥 PREDICT FILE RUNNING FROM:", __file__)
 model = joblib.load(
     os.path.join(BASE_DIR, "risk_model.pkl")
 )
@@ -19,93 +19,134 @@ vectorizer = joblib.load(
 
 
 # ===============================
-# EXPERIENCE MAP
+# DOMAIN RISK BOUNDARIES
 # ===============================
 
-exp_map = {
-    "junior": 1,
-    "mid": 2,
-    "senior": 3
-}
-
-
-# ===============================
-# ROLE FEATURE MAPS
-# ===============================
-
-ai_impact = {
-"Frontend Developer":0.7,
-"Backend Developer":0.5,
-"Full Stack Developer":0.4,
-"Data Analyst":0.6,
-"ML Engineer":0.2,
-"DevOps Engineer":0.2,
-"Cloud Engineer":0.2,
-"Cybersecurity Engineer":0.1,
-"App Developer":0.5,
-"Blockchain Developer":0.6
-}
-
-automation = {
-"Frontend Developer":0.75,
-"Backend Developer":0.55,
-"Full Stack Developer":0.45,
-"Data Analyst":0.65,
-"ML Engineer":0.25,
-"DevOps Engineer":0.2,
-"Cloud Engineer":0.2,
-"Cybersecurity Engineer":0.1,
-"App Developer":0.5,
-"Blockchain Developer":0.6
-}
-
-demand = {
-"ML Engineer":0.9,
-"Cybersecurity Engineer":0.95,
-"Cloud Engineer":0.9,
-"DevOps Engineer":0.85,
-"Backend Developer":0.75,
-"Full Stack Developer":0.8,
-"Frontend Developer":0.65,
-"App Developer":0.7,
-"Data Analyst":0.8,
-"Blockchain Developer":0.6
-}
-
-adaptability = {
-"Full Stack Developer":0.9,
-"Backend Developer":0.8,
-"Frontend Developer":0.7,
-"ML Engineer":0.75,
-"DevOps Engineer":0.85,
-"Cloud Engineer":0.85,
-"Cybersecurity Engineer":0.7,
-"App Developer":0.65,
-"Data Analyst":0.75,
-"Blockchain Developer":0.6
+domain_bounds = {
+    "Cybersecurity Engineer": (5, 25),
+    "ML Engineer": (5, 30),
+    "Cloud Engineer": (10, 35),
+    "DevOps Engineer": (15, 40),
+    "Backend Developer": (30, 65),
+    "Full Stack Developer": (35, 70),
+    "Frontend Developer": (50, 90),
+    "QA/Test Engineer": (60, 95),
+    "Blockchain Developer": (55, 85),
+    "App Developer": (45, 75),
+    "Data Analyst": (35, 70)
 }
 
 
 # ===============================
-# PREDICT FUNCTION
+# DOMAIN VOLATILITY CATEGORIES
+# ===============================
+
+high_volatility = [
+    "Frontend Developer",
+    "QA/Test Engineer",
+    "Blockchain Developer"
+]
+
+medium_volatility = [
+    "Backend Developer",
+    "Full Stack Developer",
+    "App Developer",
+    "Data Analyst"
+]
+
+low_volatility = [
+    "Cybersecurity Engineer",
+    "ML Engineer",
+    "Cloud Engineer",
+    "DevOps Engineer"
+]
+
+
+# ===============================
+# SKILL TREND LOGIC
+# ===============================
+
+TRENDING_SKILLS = [
+    "react", "next", "typescript", "tailwind",
+    "node", "fastapi", "springboot",
+    "docker", "kubernetes", "aws", "azure", "gcp",
+    "terraform", "microservices",
+    "pytorch", "tensorflow", "langchain",
+    "solidity", "web3", "blockchain",
+    "mongodb", "postgresql", "redis",
+    "graphql", "ci/cd"
+]
+
+OLD_SKILLS = [
+    "jquery", "bootstrap 3", "php 5",
+    "manual testing", "waterfall",
+    "xml", "soap", "cobol",
+    "vb6", "asp classic",
+    "flash", "table layout"
+]
+
+
+# ===============================
+# MAIN PREDICT FUNCTION
 # ===============================
 
 def predict_risk(data):
 
-    skills_vec = vectorizer.transform([data.skills])
+    print("🔥 FUNCTION CALLED")
 
-    experience_score = exp_map[data.experience_level.lower()]
+    role = data.role.strip()
+    years = int(data.years_experience)
+    skills_text = data.skills.lower()
 
-    numeric_features = [[
-        experience_score,
-        ai_impact[data.role],
-        automation[data.role],
-        demand[data.role],
-        adaptability[data.role]
-    ]]
+    domain_bounds = {
+        "Cybersecurity Engineer": (5, 25),
+        "ML Engineer": (5, 30),
+        "Cloud Engineer": (10, 35),
+        "DevOps Engineer": (15, 40),
+        "Backend Developer": (30, 65),
+        "Full Stack Developer": (35, 70),
+        "Frontend Developer": (50, 90),
+        "QA/Test Engineer": (60, 95),
+        "Blockchain Developer": (55, 85),
+        "App Developer": (45, 75),
+        "Data Analyst": (35, 70)
+    }
 
-    X = sp.hstack([skills_vec, numeric_features])
+    min_risk, max_risk = domain_bounds.get(role, (40, 80))
 
-    risk = model.predict(X)[0]
+    # Base risk
+    base_map = {
+        "Frontend Developer": 85,
+        "QA/Test Engineer": 90,
+        "Blockchain Developer": 80,
+        "Backend Developer": 60,
+        "Full Stack Developer": 60,
+        "Cybersecurity Engineer": 15,
+        "ML Engineer": 15,
+        "Cloud Engineer": 25,
+        "DevOps Engineer": 25
+    }
 
-    return round(float(risk), 2)
+    risk = base_map.get(role, 50)
+
+    # Experience
+    if years <= 1:
+        risk += 5
+    elif years <= 4:
+        risk += 2
+    elif years <= 8:
+        risk -= 5
+    else:
+        risk -= 10
+
+    # Trending impact small only
+    TRENDING = ["react", "next", "typescript", "tailwind", "node", "docker", "aws"]
+    OLD = ["jquery", "manual testing", "soap", "cobol"]
+
+    risk -= sum(skill in skills_text for skill in TRENDING) * 2
+    risk += sum(skill in skills_text for skill in OLD) * 3
+
+    # Clamp
+    risk = max(min_risk, min(max_risk, risk))
+
+    return round(risk, 2)
