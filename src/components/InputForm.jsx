@@ -278,7 +278,7 @@ export default function VantageAI() {
                             initial={{ opacity: 0, x: 20 }}
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: 20 }}
-                            style={{ ...styles.card, width: "450px", minHeight: "550px" }}
+                            style={{ ...styles.card, width: "500px", minHeight: "550px", overflow: "hidden" }}
                         >
                             <div style={styles.tabHeader}>
                                 <button onClick={() => setActiveTab("risk")} style={activeTab === "risk" ? styles.activeTab : styles.tab}>
@@ -387,9 +387,9 @@ export default function VantageAI() {
                                                     });
                                                 }
 
-                                                // 5. Sort by Match Percentage DESC and take top 2
+                                                // 5. Sort by Match Percentage DESC and take top 3
                                                 suggestions.sort((a, b) => b.matchPercentage - a.matchPercentage);
-                                                const topSuggestions = suggestions.slice(0, 2).filter(s => s.matchPercentage > 0);
+                                                const topSuggestions = suggestions.slice(0, 3).filter(s => s.matchPercentage > 0);
 
                                                 // NEW: Categorize Experience Level
                                                 const expYears = parseFloat(form.years_experience) || 0;
@@ -426,21 +426,20 @@ export default function VantageAI() {
                                                     }
                                                 };
 
-                                                // 6. Render Logic
                                                 if (topSuggestions.length > 0) {
                                                     return topSuggestions.map((shift, idx) => (
                                                         <div key={idx} style={styles.shiftCard}>
                                                             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
                                                                 <span style={{ fontWeight: '700', color: '#1e293b' }}>{shift.name} <span style={{ fontSize: '10px', color: '#94a3b8', fontWeight: 'normal' }}>({shift.category})</span></span>
-                                                                <span style={{ color: shift.matchPercentage > 40 ? '#22c55e' : '#f59e0b', fontSize: '11px', fontWeight: '800' }}>
-                                                                    {shift.matchPercentage}% Ready
+                                                                <span style={{ color: shift.matchPercentage >= 70 ? '#22c55e' : (shift.matchPercentage >= 50 ? '#f59e0b' : '#ef4444'), fontSize: '11px', fontWeight: '800' }}>
+                                                                    {shift.matchPercentage}% match
                                                                 </span>
                                                             </div>
                                                             <div style={{ height: '6px', background: '#f1f5f9', borderRadius: '3px', marginBottom: '15px' }}>
                                                                 <div style={{
                                                                     width: `${shift.matchPercentage}%`,
                                                                     height: '100%',
-                                                                    background: shift.matchPercentage > 40 ? '#22c55e' : '#f59e0b',
+                                                                    background: shift.matchPercentage >= 70 ? '#22c55e' : (shift.matchPercentage >= 50 ? '#f59e0b' : '#ef4444'),
                                                                     borderRadius: '3px',
                                                                     transition: 'width 1s ease-in-out'
                                                                 }} />
@@ -493,29 +492,45 @@ export default function VantageAI() {
                                                                             📚 Recommended Learning Resources
                                                                         </div>
                                                                         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                                                                            {shift.missing.slice(0, 3).map((missingSkill, index) => {
+                                                                            {shift.missing.map((missingSkill, index) => {
                                                                                 // Find matching resource key (case-insensitive, partial match)
                                                                                 const searchKey = missingSkill.toLowerCase();
                                                                                 let resourceData = null;
-                                                                                let matchedKey = null;
 
                                                                                 // Try exact match first
                                                                                 if (learningResources[searchKey]) {
                                                                                     resourceData = learningResources[searchKey];
-                                                                                    matchedKey = searchKey;
                                                                                 } else {
                                                                                     // Try partial match
                                                                                     const keys = Object.keys(learningResources);
                                                                                     for (let key of keys) {
                                                                                         if (searchKey.includes(key) || key.includes(searchKey)) {
                                                                                             resourceData = learningResources[key];
-                                                                                            matchedKey = key;
                                                                                             break;
                                                                                         }
                                                                                     }
                                                                                 }
 
-                                                                                if (!resourceData) return null; // No resource data for this skill
+                                                                                // Create Fallback Generic Resource
+                                                                                if (!resourceData) {
+                                                                                    resourceData = {
+                                                                                        why: `Essential skill for ${shift.name} roles.`,
+                                                                                        levels: {
+                                                                                            "Junior": [
+                                                                                                { title: `${missingSkill} Crash Course (YouTube)`, url: `https://www.youtube.com/results?search_query=${encodeURIComponent(missingSkill)}+crash+course` },
+                                                                                                { title: `Learn ${missingSkill} on freeCodeCamp`, url: `https://www.freecodecamp.org/news/search/?query=${encodeURIComponent(missingSkill)}` }
+                                                                                            ],
+                                                                                            "Mid-Level": [
+                                                                                                { title: `Advanced ${missingSkill} Concepts`, url: `https://www.youtube.com/results?search_query=advanced+${encodeURIComponent(missingSkill)}` },
+                                                                                                { title: `${missingSkill} Courses on Coursera`, url: `https://www.coursera.org/search?query=${encodeURIComponent(missingSkill)}` }
+                                                                                            ],
+                                                                                            "Senior": [
+                                                                                                { title: `${missingSkill} System Architecture & Best Practices`, url: `https://www.youtube.com/results?search_query=${encodeURIComponent(missingSkill)}+architecture+best+practices` },
+                                                                                                { title: `Official ${missingSkill} Documentation`, url: `https://www.google.com/search?q=${encodeURIComponent(missingSkill)}+official+documentation` }
+                                                                                            ]
+                                                                                        }
+                                                                                    };
+                                                                                }
 
                                                                                 const skillResources = resourceData.levels[expLevel] || [];
 
@@ -646,8 +661,8 @@ export default function VantageAI() {
 const styles = {
     page: { width: "100vw", height: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "linear-gradient(135deg, #f0fdf4, #f0f9ff, #eff6ff)", overflow: "hidden", fontFamily: "'Inter', sans-serif" },
     blob: { position: "absolute", width: "400px", height: "400px", borderRadius: "50%", opacity: 0.4, filter: "blur(90px)", zIndex: 1 },
-    container: { display: "flex", gap: "25px", zIndex: 5, alignItems: "stretch" },
-    card: { background: "rgba(255,255,255,0.96)", padding: "30px", borderRadius: "24px", width: "380px", boxShadow: "0 10px 40px rgba(0,0,0,0.06)", border: "1px solid #fff", display: 'flex', flexDirection: 'column' },
+    container: { display: "flex", gap: "25px", zIndex: 5, alignItems: "stretch", height: "85vh", maxHeight: "800px", justifyContent: "center" },
+    card: { background: "rgba(255,255,255,0.96)", padding: "30px", borderRadius: "24px", width: "400px", maxHeight: "100%", boxShadow: "0 10px 40px rgba(0,0,0,0.06)", border: "1px solid #fff", display: 'flex', flexDirection: 'column', overflowY: 'auto' },
     header: { display: "flex", gap: "12px", marginBottom: "30px" },
     title: { fontSize: "24px", fontWeight: "800", color: "#1e293b", margin: 0, lineHeight: '1.1' },
     titleAi: { color: "#2563eb", fontWeight: "400" },
