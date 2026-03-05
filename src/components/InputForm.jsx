@@ -5,7 +5,7 @@ import * as Lucide from 'lucide-react';
 import {
     Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer
 } from 'recharts';
-import { roleSkills, careerShifts } from "./data";
+import { roleSkills, careerShifts, learningResources } from "./data";
 
 export default function VantageAI() {
     const [loading, setLoading] = useState(false);
@@ -391,6 +391,41 @@ export default function VantageAI() {
                                                 suggestions.sort((a, b) => b.matchPercentage - a.matchPercentage);
                                                 const topSuggestions = suggestions.slice(0, 2).filter(s => s.matchPercentage > 0);
 
+                                                // NEW: Categorize Experience Level
+                                                const expYears = parseFloat(form.years_experience) || 0;
+                                                let expLevel = "Junior";
+                                                if (expYears >= 3 && expYears < 7) expLevel = "Mid-Level";
+                                                else if (expYears >= 7) expLevel = "Senior";
+
+                                                // NEW: Tailored Advice Map
+                                                const expAdvice = {
+                                                    'MLEngineer': {
+                                                        'Junior': ['Master Python basics (Pandas, NumPy)', 'Complete Andrew Ng\'s ML Course', 'Build 2-3 end-to-end classification models'],
+                                                        'Mid-Level': ['Focus on deep learning frameworks (PyTorch)', 'Understand MLOps principles', 'Deploy a model to AWS SageMaker'],
+                                                        'Senior': ['Design scalable ML systems architecture', 'Lead data science initiatives', 'Align AI strategy with business outcomes']
+                                                    },
+                                                    'CybersecurityEngineer': {
+                                                        'Junior': ['Get CompTIA Security+ certified', 'Learn basic threat modeling', 'Master network fundamentals (TCP/IP)'],
+                                                        'Mid-Level': ['Focus on Penetration Testing or Cloud Security', 'Learn SIEM tools (Splunk)', 'Automate security checks (Python)'],
+                                                        'Senior': ['Define enterprise security architecture', 'Lead incident response plans', 'Ensure compliance (SOC2/ISO27001)']
+                                                    },
+                                                    'DevOpsEngineer': {
+                                                        'Junior': ['Master basic Linux administration', 'Learn Git and basic CI/CD (GitHub Actions)', 'Understand Docker fundamentals'],
+                                                        'Mid-Level': ['Become proficient in Kubernetes', 'Write Infrastructure as Code (Terraform)', 'Implement advanced observability'],
+                                                        'Senior': ['Design multi-regional cloud architectures', 'Manage platform engineering teams', 'Define enterprise-wide release strategies']
+                                                    },
+                                                    'Database': {
+                                                        'Junior': ['Master Advanced SQL querying', 'Learn data modeling basics', 'Build simple ETL pipelines'],
+                                                        'Mid-Level': ['Focus on distributed data processing (Spark)', 'Understand real-time streaming (Kafka)', 'Optimize complex database queries'],
+                                                        'Senior': ['Design enterprise data lakes/warehouses', 'Implement data governance policies', 'Evaluate emerging database technologies']
+                                                    },
+                                                    'BackendDeveloper': {
+                                                        'Junior': ['Master basic REST API design', 'Learn SQL and basic database interactions', 'Write robust unit tests'],
+                                                        'Mid-Level': ['Understand microservices vs monoliths', 'Implement caching strategies (Redis)', 'Focus on application security and rate limiting'],
+                                                        'Senior': ['Design high-availability distributed systems', 'Lead backend architectural decisions', 'Mentorship and technical leadership']
+                                                    }
+                                                };
+
                                                 // 6. Render Logic
                                                 if (topSuggestions.length > 0) {
                                                     return topSuggestions.map((shift, idx) => (
@@ -438,19 +473,98 @@ export default function VantageAI() {
                                                                         {shift.missing.length > 8 && <span style={{ fontSize: '9px', color: '#94a3b8', padding: '2px' }}>+{shift.missing.length - 8} more</span>}
                                                                     </div>
                                                                 </div>
+
+                                                                {/* NEW: Experience-Tailored Action Plan */}
+                                                                <div style={{ marginTop: '5px', paddingTop: '10px', borderTop: '1px solid #f1f5f9' }}>
+                                                                    <div style={{ fontSize: '10px', fontWeight: '800', color: '#3b82f6', marginBottom: '6px', textTransform: 'uppercase' }}>
+                                                                        🎯 Tailored Action Plan ({expLevel})
+                                                                    </div>
+                                                                    <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '11.5px', color: '#475569', lineHeight: '1.6' }}>
+                                                                        {(expAdvice[shift.id]?.[expLevel] || []).map((tip, i) => (
+                                                                            <li key={i}>{tip}</li>
+                                                                        ))}
+                                                                    </ul>
+                                                                </div>
+
+                                                                {/* NEW: Learning Resources Recommendation Section */}
+                                                                {shift.missing.length > 0 && (
+                                                                    <div style={{ marginTop: '10px', paddingTop: '10px', borderTop: '1px solid #f1f5f9' }}>
+                                                                        <div style={{ fontSize: '10px', fontWeight: '800', color: '#2563eb', marginBottom: '8px', textTransform: 'uppercase' }}>
+                                                                            📚 Recommended Learning Resources
+                                                                        </div>
+                                                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                                                                            {shift.missing.slice(0, 3).map((missingSkill, index) => {
+                                                                                // Find matching resource key (case-insensitive, partial match)
+                                                                                const searchKey = missingSkill.toLowerCase();
+                                                                                let resourceData = null;
+                                                                                let matchedKey = null;
+
+                                                                                // Try exact match first
+                                                                                if (learningResources[searchKey]) {
+                                                                                    resourceData = learningResources[searchKey];
+                                                                                    matchedKey = searchKey;
+                                                                                } else {
+                                                                                    // Try partial match
+                                                                                    const keys = Object.keys(learningResources);
+                                                                                    for (let key of keys) {
+                                                                                        if (searchKey.includes(key) || key.includes(searchKey)) {
+                                                                                            resourceData = learningResources[key];
+                                                                                            matchedKey = key;
+                                                                                            break;
+                                                                                        }
+                                                                                    }
+                                                                                }
+
+                                                                                if (!resourceData) return null; // No resource data for this skill
+
+                                                                                const skillResources = resourceData.levels[expLevel] || [];
+
+                                                                                return (
+                                                                                    <div key={index} style={{ background: '#f8fafc', padding: '10px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+                                                                                        <div style={{ fontSize: '11.5px', fontWeight: '700', color: '#0f172a', marginBottom: '4px' }}>
+                                                                                            Skill: <span style={{ color: '#2563eb' }}>{missingSkill}</span>
+                                                                                        </div>
+                                                                                        <div style={{ fontSize: '10.5px', color: '#475569', marginBottom: '8px', fontStyle: 'italic' }}>
+                                                                                            <span style={{ fontWeight: '600' }}>Why Learn:</span> {resourceData.why}
+                                                                                        </div>
+                                                                                        <div style={{ fontSize: '10.5px', fontWeight: '600', color: '#334155', marginBottom: '4px' }}>
+                                                                                            Resources:
+                                                                                        </div>
+                                                                                        <ul style={{ margin: 0, paddingLeft: '16px', fontSize: '11px' }}>
+                                                                                            {skillResources.map((res, i) => (
+                                                                                                <li key={i} style={{ marginBottom: '4px' }}>
+                                                                                                    <a href={res.url} target="_blank" rel="noopener noreferrer" style={{ color: '#2563eb', textDecoration: 'none' }} onMouseOver={(e) => e.target.style.textDecoration = 'underline'} onMouseOut={(e) => e.target.style.textDecoration = 'none'}>
+                                                                                                        {res.title}
+                                                                                                    </a>
+                                                                                                </li>
+                                                                                            ))}
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                );
+                                                                            })}
+                                                                        </div>
+                                                                    </div>
+                                                                )}
+
                                                             </div>
                                                         </div>
                                                     ));
                                                 } else {
                                                     // FALLBACK: High Demand Skills
+                                                    const expFallback = {
+                                                        'Junior': 'Focus on building strong foundational knowledge and a proven portfolio in these high-demand areas to quickly launch your career:',
+                                                        'Mid-Level': 'Your experience is valuable. Focus on strategically specializing in one of these emerging core technologies to pivot safely:',
+                                                        'Senior': 'Leverage your senior experience by understanding how these high-demand technologies shape enterprise architecture and technical strategy:'
+                                                    };
+
                                                     return (
                                                         <div style={{ ...styles.shiftCard, borderLeft: '4px solid #3b82f6' }}>
                                                             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
                                                                 <Lucide.TrendingUp size={20} color="#2563eb" />
-                                                                <span style={{ fontWeight: '800', color: '#1e293b', fontSize: '14px' }}>Future-Proof Your Profile</span>
+                                                                <span style={{ fontWeight: '800', color: '#1e293b', fontSize: '14px' }}>Future-Proof Your Profile ({expLevel})</span>
                                                             </div>
                                                             <p style={{ fontSize: '11px', color: '#475569', marginBottom: '15px', lineHeight: '1.5' }}>
-                                                                Your current skills don't currently match highly stable roles directly. Consider learning these trending, high-demand technologies to easily pivot and drastically lower your layoff risk:
+                                                                Your current skills don't currently match highly stable roles directly. {expFallback[expLevel]}
                                                             </p>
                                                             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                                                                 {['AWS / Azure Cloud', 'Machine Learning (Python)', 'Generative AI Prompts', 'Docker / Kubernetes', 'Cybersecurity Basics'].map((skill, i) => (
