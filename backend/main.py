@@ -152,20 +152,50 @@ def predict(data: RiskInput):
         reasons = []
         reasons.append(f"Role Impact: {rule['market_reason']}")
 
-        # 4. Adjustment Logic
-        user_skills = data.skills.lower()
-        modern = ['react', 'nextjs', 'aws', 'docker', 'kubernetes', 'genai', 'cyberark', 'sentinel', 'pytorch', 'typescript']
-        legacy = ['jquery', 'manual testing', 'php 5', 'html only', 'css only']
+        # 4. Adjustment Logic - DYNAMIC SKILL EVALUATION
+        user_skills_raw = [s.strip().lower() for s in data.skills.split(',') if s.strip()]
+        user_skills = set(user_skills_raw)  # Remove duplicates
+        volume = len(user_skills)
+
+        modern = {
+            'react', 'nextjs', 'aws', 'amazon web services', 'docker', 'kubernetes', 'genai', 
+            'generative ai', 'machine learning', 'cyberark', 'sentinel', 'pytorch', 'tensorflow', 
+            'typescript', 'rust', 'go', 'golang', 'cloud', 'gcp', 'azure', 'devops', 'ci/cd',
+            'nodejs', 'node.js', 'vue', 'svelte', 'graphql', 'mongodb', 'postgresql', 'fastapi'
+        }
+        legacy = {
+            'jquery', 'manual testing', 'php 5', 'html only', 'css only', 'vbscript', 
+            'cobol', 'svn', 'waterfall', 'flash', 'actionscript'
+        }
 
         adjustment = 0
-        if any(k in user_skills for k in modern):
-            adjustment -= 12
-            reasons.append("Skill Advantage: Your knowledge of modern tech significantly buffers you against layoffs.")
+        modern_count = 0
+        legacy_count = 0
+        neutral_count = 0
+
+        for skill in user_skills:
+            if any(m in skill for m in modern):
+                modern_count += 1
+            elif any(l in skill for l in legacy):
+                legacy_count += 1
+            else:
+                neutral_count += 1
+
+        # Calculate impact with diminishing returns (caps via min/max)
+        modern_impact = min(modern_count * 2.0, 20.0)      # Max -20% risk deduction
+        legacy_impact = min(legacy_count * 3.0, 20.0)      # Max +20% risk penalty
+        neutral_impact = min(neutral_count * 0.5, 5.0)     # Max -5% risk deduction for sheer volume of neutral skills
         
-        if any(k in user_skills for k in legacy):
-            penalty = 5 if normalized_role == 'Cybersecurity Analyst' else 15
-            adjustment += penalty
-            reasons.append("Skill Warning: Dependence on legacy tools increases vulnerability to AI automation.")
+        adjustment = (-modern_impact) + legacy_impact + (-neutral_impact)
+
+        if modern_count > 0:
+            reasons.append(f"Skill Advantage: You have {modern_count} modern/in-demand skills, reducing your risk by {modern_impact}%.")
+        if legacy_count > 0:
+            reasons.append(f"Skill Warning: You listed {legacy_count} legacy technologies, increasing your risk by {legacy_impact}%.")
+        if neutral_count > 0:
+            reasons.append(f"Skill Breadth: Your general knowledge of {neutral_count} additional skills reduces your risk slightly by {neutral_impact}%.")
+        if volume == 0:
+            reasons.append("Skill Warning: No skills provided. Adding skills strongly impacts your layoff risk calculation.")
 
         # Experience Calculation (Safety check for NoneType)
         exp = data.years_experience if data.years_experience is not None else 0
@@ -197,6 +227,42 @@ def predict(data: RiskInput):
         final_risk = max(rule['min'], min(base_ai_risk + adjustment, rule['max']))
         risk_level = "Low" if final_risk <= 35 else "Moderate" if final_risk <= 65 else "High"
 
+        # 6. Simulated Risk for Target Roles (Comparative Risk Filtering)
+        stable_target_role_keys = ['ML Engineer', 'Cybersecurity Analyst', 'DevOps Engineer', 'Data Analyst', 'Backend Developer']
+        target_role_risks = {}
+
+        for key in stable_target_role_keys:
+            # Skip calculating if the user is already this role
+            if key.replace(" ", "").lower() == normalized_role.replace(" ", "").lower() or role_rules[key] == rule:
+                continue
+
+            sim_rule = role_rules[key]
+            try:
+                # Calculate base risk for this theoretical role, keeping user's real experience constant
+                sim_base = predict_risk(
+                    role=key,
+                    experience_level="mid",
+                    years_experience=exp,
+                    ai_impact_score=sim_rule['ai'],
+                    automation_risk=sim_rule['ai'],
+                    market_demand=sim_rule['demand'],
+                    skill_adaptability=0.8
+                )
+                if sim_base is None:
+                    sim_base = (sim_rule['min'] + sim_rule['max']) / 2
+            except Exception:
+                sim_base = (sim_rule['min'] + sim_rule['max']) / 2
+            
+            # Apply exactly the same skill deduction logic they earned in step 4
+            sim_final = max(sim_rule['min'], min(sim_base + adjustment, sim_rule['max']))
+            
+            # Normalize key back to frontend expected ID (e.g. Cybersecurity Analyst -> CybersecurityEngineer)
+            front_id = key.replace(" ", "")
+            if front_id == 'CybersecurityAnalyst': front_id = 'CybersecurityEngineer'
+            if front_id == 'DataAnalyst': front_id = 'Database'
+
+            target_role_risks[front_id] = round(sim_final, 2)
+
         return {
             "status": "success",
             "role": normalized_role,
@@ -207,7 +273,8 @@ def predict(data: RiskInput):
                 "min": rule['min'],
                 "max": rule['max'],
                 "color": "green" if risk_level == "Low" else "orange" if risk_level == "Moderate" else "red"
-            }
+            },
+            "target_role_risks": target_role_risks
         }
 
     except Exception as e:

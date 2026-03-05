@@ -86,26 +86,7 @@ export default function Dashboard() {
                     </div>
                 </div>
 
-                {/* Market Sentiment Line Chart */}
-                <div style={{ ...styles.card, gridColumn: 'span 2' }}>
-                    <h3 style={styles.cardTitle}>Tech Hiring Sentiment (Last 12 Months)</h3>
-                    <div style={{ height: '250px' }}>
-                        <ResponsiveContainer width="100%" height="100%">
-                            <LineChart data={[
-                                { month: 'Jan', value: 40 }, { month: 'Feb', value: 35 }, { month: 'Mar', value: 45 },
-                                { month: 'Apr', value: 55 }, { month: 'May', value: 60 }, { month: 'Jun', value: 75 },
-                                { month: 'Jul', value: 70 }, { month: 'Aug', value: 85 }, { month: 'Sep', value: 90 },
-                                { month: 'Oct', value: 88 }, { month: 'Nov', value: 95 }, { month: 'Dec', value: 98 },
-                            ]}>
-                                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                                <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#64748b' }} />
-                                <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#64748b' }} />
-                                <Tooltip />
-                                <Line type="monotone" dataKey="value" stroke="#3b82f6" strokeWidth={3} dot={{ r: 6, fill: '#3b82f6' }} activeDot={{ r: 8 }} />
-                            </LineChart>
-                        </ResponsiveContainer>
-                    </div>
-                </div>
+
             </div>
 
             <footer style={styles.footer}>

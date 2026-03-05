@@ -133,7 +133,17 @@ export default function VantageAI() {
     };
 
     const handleChatRequest = async () => {
-        if (!chatMessage || !result) return;
+        if (!chatMessage) return;
+
+        if (!result) {
+            setChatHistory(prev => [
+                ...prev,
+                { role: 'user', text: chatMessage },
+                { role: 'bot', text: "Please use the 'Predict Risk' button on the left first so I understand your career profile!" }
+            ]);
+            setChatMessage("");
+            return;
+        }
 
         const newUserMsg = { role: 'user', text: chatMessage };
         setChatHistory(prev => [...prev, newUserMsg]);
@@ -308,56 +318,147 @@ export default function VantageAI() {
 
                                     {activeTab === "career" && (
                                         <motion.div key="career" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                                            <h4 style={styles.tabTitle}>Career Shift Strategy</h4>
+                                            <h4 style={styles.tabTitle}>Dynamic Career Shift Strategy</h4>
 
                                             {(() => {
-                                                const normalizedRole = form.role.replace(/\s+/g, '').toLowerCase();
-                                                const matchingKey = Object.keys(careerShifts).find(k => k.toLowerCase() === normalizedRole);
-                                                const shifts = matchingKey ? careerShifts[matchingKey] : null;
+                                                // 1. Get user skills array (lowercased & trimmed)
+                                                const userSkillsList = (form.skills || "").split(',').map(s => s.trim().toLowerCase()).filter(s => s);
 
-                                                if (shifts) {
-                                                    return shifts.map((shift, idx) => (
+                                                // 2. Define High-Stability "Safe Haven" Roles
+                                                const targetRoles = [
+                                                    { id: 'MLEngineer', name: 'ML Engineer', category: 'AI/ML' },
+                                                    { id: 'CybersecurityEngineer', name: 'Cybersecurity Engineer', category: 'Security' },
+                                                    { id: 'DevOpsEngineer', name: 'DevOps Engineer', category: 'Infrastructure' },
+                                                    { id: 'Database', name: 'Data Engineer', category: 'Data' },
+                                                    { id: 'BackendDeveloper', name: 'Backend Engineer', category: 'Core Tech' }
+                                                ];
+
+                                                // 3. Prevent recommending their exact current role, AND Apply Comparative Risk Filtering
+                                                const currentRoleLower = form.role.replace(/[^a-zA-Z]/g, '').toLowerCase();
+                                                const availableRoles = [];
+
+                                                for (const targetRole of targetRoles) {
+                                                    // Skip their current role
+                                                    if (targetRole.id.toLowerCase() === currentRoleLower) continue;
+
+                                                    // Comparative Risk Filtering (Pillar 1)
+                                                    // Ensure a move to this role ACTUALLY lowers their risk according to the backend
+                                                    if (result.target_role_risks) {
+                                                        const simulatedRisk = result.target_role_risks[targetRole.id];
+                                                        // Only suggest if the simulated risk is strictly lower than their current risk
+                                                        if (simulatedRisk === undefined || simulatedRisk >= result.layoff_risk) {
+                                                            continue;
+                                                        }
+                                                    }
+                                                    availableRoles.push(targetRole);
+                                                }
+
+                                                // 4. Calculate matches
+                                                let suggestions = [];
+
+                                                for (const roleDef of availableRoles) {
+                                                    const requiredSkillsRaw = roleSkills[roleDef.id] || [];
+                                                    const requiredSkills = requiredSkillsRaw.map(s => s.toLowerCase());
+
+                                                    if (requiredSkills.length === 0) continue;
+
+                                                    // Find Overlap
+                                                    const matched = [];
+                                                    const missing = [];
+
+                                                    requiredSkillsRaw.forEach(rawSkill => {
+                                                        const reqSkillLow = rawSkill.toLowerCase();
+                                                        // Check if user has this skill (partial match allowed e.g. "react" in "reactjs")
+                                                        const hasSkill = userSkillsList.some(userSkill =>
+                                                            userSkill.includes(reqSkillLow) || reqSkillLow.includes(userSkill)
+                                                        );
+
+                                                        if (hasSkill) matched.push(rawSkill);
+                                                        else missing.push(rawSkill);
+                                                    });
+
+                                                    const matchPercentage = Math.round((matched.length / requiredSkills.length) * 100);
+
+                                                    suggestions.push({
+                                                        ...roleDef,
+                                                        matchPercentage,
+                                                        matched,
+                                                        missing
+                                                    });
+                                                }
+
+                                                // 5. Sort by Match Percentage DESC and take top 2
+                                                suggestions.sort((a, b) => b.matchPercentage - a.matchPercentage);
+                                                const topSuggestions = suggestions.slice(0, 2).filter(s => s.matchPercentage > 0);
+
+                                                // 6. Render Logic
+                                                if (topSuggestions.length > 0) {
+                                                    return topSuggestions.map((shift, idx) => (
                                                         <div key={idx} style={styles.shiftCard}>
                                                             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                                                                <span style={{ fontWeight: '700', color: '#1e293b' }}>{formatWord(shift.to)}</span>
-                                                                <span style={{ color: '#22c55e', fontSize: '11px', fontWeight: '800' }}>{shift.match}% Ready</span>
+                                                                <span style={{ fontWeight: '700', color: '#1e293b' }}>{shift.name} <span style={{ fontSize: '10px', color: '#94a3b8', fontWeight: 'normal' }}>({shift.category})</span></span>
+                                                                <span style={{ color: shift.matchPercentage > 40 ? '#22c55e' : '#f59e0b', fontSize: '11px', fontWeight: '800' }}>
+                                                                    {shift.matchPercentage}% Ready
+                                                                </span>
                                                             </div>
-                                                            <div style={{ height: '6px', background: '#f1f5f9', borderRadius: '3px', marginBottom: '12px' }}>
-                                                                <div style={{ width: `${shift.match}%`, height: '100%', background: '#22c55e', borderRadius: '3px' }} />
+                                                            <div style={{ height: '6px', background: '#f1f5f9', borderRadius: '3px', marginBottom: '15px' }}>
+                                                                <div style={{
+                                                                    width: `${shift.matchPercentage}%`,
+                                                                    height: '100%',
+                                                                    background: shift.matchPercentage > 40 ? '#22c55e' : '#f59e0b',
+                                                                    borderRadius: '3px',
+                                                                    transition: 'width 1s ease-in-out'
+                                                                }} />
                                                             </div>
 
-                                                            {shift.skills_comparison && (
-                                                                <div style={{ height: '220px', width: '100%', minWidth: '280px', margin: '15px 0' }}>
-                                                                    <ResponsiveContainer width="100%" height="100%">
-                                                                        <RadarChart cx="50%" cy="50%" outerRadius="80%" data={shift.skills_comparison}>
-                                                                            <PolarGrid />
-                                                                            <PolarAngleAxis dataKey="subject" tick={{ fontSize: 10, fill: '#64748b' }} />
-                                                                            <Radar name="You" dataKey="A" stroke="#3b82f6" fill="#3b82f6" fillOpacity={0.4} />
-                                                                            <Radar name="Goal" dataKey="B" stroke="#ec4899" fill="#ec4899" fillOpacity={0.4} />
-                                                                        </RadarChart>
-                                                                    </ResponsiveContainer>
+                                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                                                                {/* Matched Skills */}
+                                                                <div>
+                                                                    <div style={{ fontSize: '10px', fontWeight: '700', color: '#64748b', marginBottom: '4px', textTransform: 'uppercase' }}>
+                                                                        <Lucide.CheckCircle2 size={10} color="#22c55e" style={{ marginRight: '4px', verticalAlign: 'middle' }} />
+                                                                        Skills You Already Have
+                                                                    </div>
+                                                                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
+                                                                        {shift.matched.map((s, i) => (
+                                                                            <span key={i} style={{ background: '#dcfce7', color: '#166534', padding: '2px 6px', borderRadius: '4px', fontSize: '9.5px', fontWeight: '600' }}>{s}</span>
+                                                                        ))}
+                                                                    </div>
                                                                 </div>
-                                                            )}
 
-                                                            <div style={styles.adviceBox}>
-                                                                <span style={{ fontWeight: '700', fontSize: '10px', color: '#64748b' }}>💡 Roadmap: {shift.bridge}</span>
-                                                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '8px' }}>
-                                                                    {shift.links?.map((link, j) => (
-                                                                        <a key={j} href={link} target="_blank" rel="noreferrer" style={styles.learningLink}>
-                                                                            <Lucide.ExternalLink size={10} /> {link.includes('react') ? 'React' : link.includes('mongodb') ? 'MongoDB' : 'Course'}
-                                                                        </a>
-                                                                    ))}
+                                                                {/* Missing Skills */}
+                                                                <div>
+                                                                    <div style={{ fontSize: '10px', fontWeight: '700', color: '#64748b', marginBottom: '4px', textTransform: 'uppercase' }}>
+                                                                        <Lucide.ArrowUpRight size={10} color="#f59e0b" style={{ marginRight: '4px', verticalAlign: 'middle' }} />
+                                                                        Skills to Learn (Gap Analysis)
+                                                                    </div>
+                                                                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
+                                                                        {shift.missing.slice(0, 8).map((s, i) => (
+                                                                            <span key={i} style={{ background: '#fffbeb', color: '#b45309', padding: '2px 6px', borderRadius: '4px', fontSize: '9.5px', fontWeight: '600', border: '1px solid #fef3c7' }}>{s}</span>
+                                                                        ))}
+                                                                        {shift.missing.length > 8 && <span style={{ fontSize: '9px', color: '#94a3b8', padding: '2px' }}>+{shift.missing.length - 8} more</span>}
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     ));
                                                 } else {
+                                                    // FALLBACK: High Demand Skills
                                                     return (
-                                                        <div style={styles.positiveMsgCard}>
-                                                            <Lucide.Activity size={32} color="#2563eb" />
-                                                            <p style={{ fontSize: '13px', textAlign: 'center', marginTop: '10px' }}>
-                                                                Your current path is highly specialized. Focusing on system architecture will further lower your risk.
+                                                        <div style={{ ...styles.shiftCard, borderLeft: '4px solid #3b82f6' }}>
+                                                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
+                                                                <Lucide.TrendingUp size={20} color="#2563eb" />
+                                                                <span style={{ fontWeight: '800', color: '#1e293b', fontSize: '14px' }}>Future-Proof Your Profile</span>
+                                                            </div>
+                                                            <p style={{ fontSize: '11px', color: '#475569', marginBottom: '15px', lineHeight: '1.5' }}>
+                                                                Your current skills don't currently match highly stable roles directly. Consider learning these trending, high-demand technologies to easily pivot and drastically lower your layoff risk:
                                                             </p>
+                                                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                                                                {['AWS / Azure Cloud', 'Machine Learning (Python)', 'Generative AI Prompts', 'Docker / Kubernetes', 'Cybersecurity Basics'].map((skill, i) => (
+                                                                    <span key={i} style={{ background: '#eff6ff', color: '#1d4ed8', padding: '4px 8px', borderRadius: '6px', fontSize: '10px', fontWeight: '700' }}>
+                                                                        {skill}
+                                                                    </span>
+                                                                ))}
+                                                            </div>
                                                         </div>
                                                     );
                                                 }
