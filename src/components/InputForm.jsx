@@ -184,6 +184,84 @@ export default function VantageAI() {
         setLoading(false);
     };
 
+    const renderMissingSkillsResources = (missingSkills, expLevel, relatedRoleContext) => {
+        if (!missingSkills || missingSkills.length === 0) return null;
+
+        return (
+            <div style={{ marginTop: '10px', paddingTop: '10px', borderTop: '1px solid #f1f5f9' }}>
+                <div style={{ fontSize: '10px', fontWeight: '800', color: '#2563eb', marginBottom: '8px', textTransform: 'uppercase' }}>
+                    📚 Recommended Learning Resources
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                    {missingSkills.map((missingSkill, index) => {
+                        const searchKey = missingSkill.toLowerCase();
+                        let resourceData = null;
+
+                        if (learningResources[searchKey]) {
+                            resourceData = learningResources[searchKey];
+                        } else {
+                            const keys = Object.keys(learningResources);
+                            for (let key of keys) {
+                                if (searchKey.includes(key) || key.includes(searchKey)) {
+                                    resourceData = learningResources[key];
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (!resourceData) {
+                            resourceData = {
+                                why: `Essential foundational skill needed for ${relatedRoleContext}.`,
+                                levels: {
+                                    "Junior": [
+                                        { title: `Learn ${missingSkill} on freeCodeCamp`, url: `https://www.freecodecamp.org/news/search/?query=${encodeURIComponent(missingSkill)}` },
+                                        { title: `${missingSkill} on Codecademy`, url: `https://www.codecademy.com/search?query=${encodeURIComponent(missingSkill)}` },
+                                        { title: `${missingSkill} Courses (edX)`, url: `https://www.edx.org/search?q=${encodeURIComponent(missingSkill)}` }
+                                    ],
+                                    "Mid-Level": [
+                                        { title: `${missingSkill} on Coursera`, url: `https://www.coursera.org/search?query=${encodeURIComponent(missingSkill)}` },
+                                        { title: `${missingSkill} on Udemy`, url: `https://www.udemy.com/courses/search/?q=${encodeURIComponent(missingSkill)}` },
+                                        { title: `${missingSkill} on Pluralsight`, url: `https://www.pluralsight.com/search?q=${encodeURIComponent(missingSkill)}` }
+                                    ],
+                                    "Senior": [
+                                        { title: `${missingSkill} System Architecture`, url: `https://www.oreilly.com/search/?query=${encodeURIComponent(missingSkill)}` },
+                                        { title: `Expert ${missingSkill} (Coursera)`, url: `https://www.coursera.org/search?query=${encodeURIComponent(missingSkill)}` },
+                                        { title: `${missingSkill} MDN Web Docs`, url: `https://developer.mozilla.org/en-US/search?q=${encodeURIComponent(missingSkill)}` }
+                                    ]
+                                }
+                            };
+                        }
+
+                        const skillResources = resourceData.levels[expLevel] || [];
+
+                        return (
+                            <div key={index} style={{ background: '#f8fafc', padding: '10px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+                                <div style={{ fontSize: '11.5px', fontWeight: '700', color: '#0f172a', marginBottom: '4px' }}>
+                                    Skill: <span style={{ color: '#2563eb' }}>{missingSkill}</span>
+                                </div>
+                                <div style={{ fontSize: '10.5px', color: '#475569', marginBottom: '8px', fontStyle: 'italic' }}>
+                                    <span style={{ fontWeight: '600' }}>Why Learn:</span> {resourceData.why}
+                                </div>
+                                <div style={{ fontSize: '10.5px', fontWeight: '600', color: '#334155', marginBottom: '4px' }}>
+                                    Resources:
+                                </div>
+                                <ul style={{ margin: 0, paddingLeft: '16px', fontSize: '11px' }}>
+                                    {skillResources.map((res, i) => (
+                                        <li key={i} style={{ marginBottom: '4px' }}>
+                                            <a href={res.url} target="_blank" rel="noopener noreferrer" style={{ color: '#2563eb', textDecoration: 'none' }} onMouseOver={(e) => e.target.style.textDecoration = 'underline'} onMouseOut={(e) => e.target.style.textDecoration = 'none'}>
+                                                {res.title}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+        );
+    };
+
     return (
         <div style={styles.page}>
             <div style={{ ...styles.blob, background: "#bae6fd", top: "5%", left: "10%" }} />
@@ -486,82 +564,7 @@ export default function VantageAI() {
                                                                 </div>
 
                                                                 {/* NEW: Learning Resources Recommendation Section */}
-                                                                {shift.missing.length > 0 && (
-                                                                    <div style={{ marginTop: '10px', paddingTop: '10px', borderTop: '1px solid #f1f5f9' }}>
-                                                                        <div style={{ fontSize: '10px', fontWeight: '800', color: '#2563eb', marginBottom: '8px', textTransform: 'uppercase' }}>
-                                                                            📚 Recommended Learning Resources
-                                                                        </div>
-                                                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                                                                            {shift.missing.map((missingSkill, index) => {
-                                                                                // Find matching resource key (case-insensitive, partial match)
-                                                                                const searchKey = missingSkill.toLowerCase();
-                                                                                let resourceData = null;
-
-                                                                                // Try exact match first
-                                                                                if (learningResources[searchKey]) {
-                                                                                    resourceData = learningResources[searchKey];
-                                                                                } else {
-                                                                                    // Try partial match
-                                                                                    const keys = Object.keys(learningResources);
-                                                                                    for (let key of keys) {
-                                                                                        if (searchKey.includes(key) || key.includes(searchKey)) {
-                                                                                            resourceData = learningResources[key];
-                                                                                            break;
-                                                                                        }
-                                                                                    }
-                                                                                }
-
-                                                                                // Create Fallback Generic Resource
-                                                                                if (!resourceData) {
-                                                                                    resourceData = {
-                                                                                        why: `Essential foundational skill needed for ${shift.name} roles.`,
-                                                                                        levels: {
-                                                                                            "Junior": [
-                                                                                                { title: `Official ${missingSkill} Documentation`, url: `https://www.google.com/search?q=${encodeURIComponent(missingSkill)}+official+documentation` },
-                                                                                                { title: `${missingSkill} Basics on freeCodeCamp`, url: `https://www.freecodecamp.org/news/search/?query=${encodeURIComponent(missingSkill)}` },
-                                                                                                { title: `Introductory ${missingSkill} Course (Coursera)`, url: `https://www.coursera.org/search?query=${encodeURIComponent(missingSkill)}&productDifficultyLevel=Beginner` }
-                                                                                            ],
-                                                                                            "Mid-Level": [
-                                                                                                { title: `${missingSkill} Developer Guide`, url: `https://www.google.com/search?q=${encodeURIComponent(missingSkill)}+developer+guide+best+practices` },
-                                                                                                { title: `Advanced ${missingSkill} Courses (edX)`, url: `https://www.edx.org/search?q=${encodeURIComponent(missingSkill)}` },
-                                                                                                { title: `Build a Project with ${missingSkill} (Tutorial)`, url: `https://www.youtube.com/results?search_query=build+project+with+${encodeURIComponent(missingSkill)}` }
-                                                                                            ],
-                                                                                            "Senior": [
-                                                                                                { title: `${missingSkill} Enterprise Architecture Patterns`, url: `https://www.google.com/search?q=${encodeURIComponent(missingSkill)}+system+architecture+patterns` },
-                                                                                                { title: `Expert Level ${missingSkill} Training (Udemy)`, url: `https://www.udemy.com/courses/search/?src=ukw&q=${encodeURIComponent(missingSkill)}&lang=en&sort=highest-rated` }
-                                                                                            ]
-                                                                                        }
-                                                                                    };
-                                                                                }
-
-                                                                                const skillResources = resourceData.levels[expLevel] || [];
-
-                                                                                return (
-                                                                                    <div key={index} style={{ background: '#f8fafc', padding: '10px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-                                                                                        <div style={{ fontSize: '11.5px', fontWeight: '700', color: '#0f172a', marginBottom: '4px' }}>
-                                                                                            Skill: <span style={{ color: '#2563eb' }}>{missingSkill}</span>
-                                                                                        </div>
-                                                                                        <div style={{ fontSize: '10.5px', color: '#475569', marginBottom: '8px', fontStyle: 'italic' }}>
-                                                                                            <span style={{ fontWeight: '600' }}>Why Learn:</span> {resourceData.why}
-                                                                                        </div>
-                                                                                        <div style={{ fontSize: '10.5px', fontWeight: '600', color: '#334155', marginBottom: '4px' }}>
-                                                                                            Resources:
-                                                                                        </div>
-                                                                                        <ul style={{ margin: 0, paddingLeft: '16px', fontSize: '11px' }}>
-                                                                                            {skillResources.map((res, i) => (
-                                                                                                <li key={i} style={{ marginBottom: '4px' }}>
-                                                                                                    <a href={res.url} target="_blank" rel="noopener noreferrer" style={{ color: '#2563eb', textDecoration: 'none' }} onMouseOver={(e) => e.target.style.textDecoration = 'underline'} onMouseOut={(e) => e.target.style.textDecoration = 'none'}>
-                                                                                                        {res.title}
-                                                                                                    </a>
-                                                                                                </li>
-                                                                                            ))}
-                                                                                        </ul>
-                                                                                    </div>
-                                                                                );
-                                                                            })}
-                                                                        </div>
-                                                                    </div>
-                                                                )}
+                                                                {renderMissingSkillsResources(shift.missing, expLevel, shift.name + ' roles')}
 
                                                             </div>
                                                         </div>
@@ -574,6 +577,8 @@ export default function VantageAI() {
                                                         'Senior': 'Leverage your senior experience by understanding how these high-demand technologies shape enterprise architecture and technical strategy:'
                                                     };
 
+                                                    const futureSkills = ['Cloud', 'Machine Learning', 'Generative AI', 'Docker', 'Cybersecurity'];
+
                                                     return (
                                                         <div style={{ ...styles.shiftCard, borderLeft: '4px solid #3b82f6' }}>
                                                             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
@@ -584,12 +589,13 @@ export default function VantageAI() {
                                                                 Your current skills don't currently match highly stable roles directly. {expFallback[expLevel]}
                                                             </p>
                                                             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-                                                                {['AWS / Azure Cloud', 'Machine Learning (Python)', 'Generative AI Prompts', 'Docker / Kubernetes', 'Cybersecurity Basics'].map((skill, i) => (
+                                                                {futureSkills.map((skill, i) => (
                                                                     <span key={i} style={{ background: '#eff6ff', color: '#1d4ed8', padding: '4px 8px', borderRadius: '6px', fontSize: '10px', fontWeight: '700' }}>
                                                                         {skill}
                                                                     </span>
                                                                 ))}
                                                             </div>
+                                                            {renderMissingSkillsResources(futureSkills, expLevel, 'future-proofing your profile')}
                                                         </div>
                                                     );
                                                 }

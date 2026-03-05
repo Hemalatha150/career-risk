@@ -618,5 +618,45 @@ export const learningResources = {
                 { title: "Enterprise Cloud Governance", url: "https://cloud.google.com/architecture/framework" }
             ]
         }
+    },
+    "cybersecurity": {
+        why: "Essential for protecting modern cloud computing and network perimeters against threats.",
+        levels: {
+            "Junior": [
+                { title: "Cybersecurity Basics (Coursera/IBM)", url: "https://www.coursera.org/professional-certificates/ibm-cybersecurity-analyst" },
+                { title: "OWASP Top 10 Security Basics", url: "https://owasp.org/www-project-top-ten/" },
+                { title: "Introduction to Cybersecurity (Codecademy)", url: "https://www.codecademy.com/learn/introduction-to-cybersecurity" }
+            ],
+            "Mid-Level": [
+                { title: "CompTIA Security+ Certification Path", url: "https://www.comptia.org/certifications/security" },
+                { title: "Penetration Testing (edX)", url: "https://www.edx.org/learn/cybersecurity" },
+                { title: "Cloud Security Architecture", url: "https://aws.amazon.com/security/" }
+            ],
+            "Senior": [
+                { title: "CISSP Certification Training", url: "https://www.isc2.org/Certifications/CISSP" },
+                { title: "Enterprise Zero Trust Architectures", url: "https://www.cisa.gov/zero-trust-maturity-model" },
+                { title: "Advanced Incident Response", url: "https://www.sans.org/cyber-security-courses/advanced-incident-response-threat-hunting/" }
+            ]
+        }
+    },
+    "generative ai": {
+        why: "The bleeding edge of tech; integrating GenAI models allows for exponential workflow improvements.",
+        levels: {
+            "Junior": [
+                { title: "Generative AI for Everyone (Coursera)", url: "https://www.coursera.org/learn/generative-ai-for-everyone" },
+                { title: "Prompt Engineering Guide", url: "https://www.promptingguide.ai/" },
+                { title: "Introduction to Generative AI (Google Cloud)", url: "https://www.cloudskillsboost.google/course_templates/536" }
+            ],
+            "Mid-Level": [
+                { title: "Building Applications with LLMs", url: "https://www.deeplearning.ai/short-courses/building-systems-with-chatgpt/" },
+                { title: "Hugging Face Generative AI Guides", url: "https://huggingface.co/course/" },
+                { title: "LangChain Documentation", url: "https://python.langchain.com/docs/get_started/introduction" }
+            ],
+            "Senior": [
+                { title: "Fine-Tuning LLMs Architecture", url: "https://www.philschmid.de/fine-tune-llms-in-2024-with-trl" },
+                { title: "AI Agent Frameworks & Patterns", url: "https://microsoft.github.io/autogen/" },
+                { title: "RAG Evaluation and Scaling", url: "https://docs.llamaindex.ai/en/stable/" }
+            ]
+        }
     }
 };
