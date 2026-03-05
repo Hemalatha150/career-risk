@@ -152,50 +152,115 @@ def predict(data: RiskInput):
         reasons = []
         reasons.append(f"Role Impact: {rule['market_reason']}")
 
-        # 4. Adjustment Logic - DYNAMIC SKILL EVALUATION
+        # 4. Adjustment Logic - DYNAMIC SKILL EVALUATION (DIVERSITY + IMPACT)
         user_skills_raw = [s.strip().lower() for s in data.skills.split(',') if s.strip()]
-        user_skills = set(user_skills_raw)  # Remove duplicates
+        user_skills = set()
+        
+        # Simple plural/synonym normalization mapping for core skills
+        normalization_map = {
+            "node.js": "nodejs", "node": "nodejs", "reactjs": "react", 
+            "amazon web services": "aws", "gcp": "google cloud", "ml": "machine learning",
+            "ai": "artificial intelligence", "genai": "generative ai", 
+            "javascript": "js", "typescript": "ts", "k8s": "kubernetes",
+            "golang": "go", "postgres": "postgresql"
+        }
+
+        for s in user_skills_raw:
+            normalized = normalization_map.get(s, s)
+            user_skills.add(normalized)
+
         volume = len(user_skills)
 
-        modern = {
-            'react', 'nextjs', 'aws', 'amazon web services', 'docker', 'kubernetes', 'genai', 
-            'generative ai', 'machine learning', 'cyberark', 'sentinel', 'pytorch', 'tensorflow', 
-            'typescript', 'rust', 'go', 'golang', 'cloud', 'gcp', 'azure', 'devops', 'ci/cd',
-            'nodejs', 'node.js', 'vue', 'svelte', 'graphql', 'mongodb', 'postgresql', 'fastapi'
-        }
-        legacy = {
-            'jquery', 'manual testing', 'php 5', 'html only', 'css only', 'vbscript', 
-            'cobol', 'svn', 'waterfall', 'flash', 'actionscript'
+        # A. DOMAIN KNOWLEDGE MAP
+        domain_mapping = {
+            "frontend": {"react", "vue", "angular", "svelte", "html", "css", "js", "ts", "tailwind", "bootstrap", "nextjs", "nuxt", "ui", "ux"},
+            "backend": {"nodejs", "python", "java", "c#", "go", "rust", "php", "ruby", "django", "spring", "express", "fastapi"},
+            "database": {"sql", "mysql", "postgresql", "mongodb", "redis", "cassandra", "dynamodb", "neo4j", "oracle"},
+            "cloud_platform": {"aws", "azure", "google cloud", "heroku", "vercel", "cloudflare"},
+            "devops_infra": {"docker", "kubernetes", "jenkins", "gitlab ci", "terraform", "ansible", "linux", "bash", "linux/unix", "ci/cd"},
+            "data_ai": {"machine learning", "artificial intelligence", "data science", "pandas", "numpy", "tensorflow", "pytorch", "generative ai", "nlp", "llm", "data engineering", "spark"},
+            "security": {"cybersecurity", "penetration testing", "ethical hacking", "owasp", "cryptography", "iam", "network security"}
         }
 
-        adjustment = 0
-        modern_count = 0
+        # B. TRENDING & HIGH IMPACT TECHNOLOGIES (Outcome Creating)
+        trending_tech = {"cloud", "aws", "azure", "google cloud", "kubernetes", "docker", "generative ai", "machine learning", "artificial intelligence", "devops", "go", "rust", "react", "nextjs", "terraform"}
+        high_impact_tech = {"machine learning", "artificial intelligence", "generative ai", "data engineering", "cybersecurity", "cloud architecture", "kubernetes", "devsecops"}
+        legacy_tech = {"jquery", "manual testing", "php 5", "html only", "css only", "vbscript", "cobol", "svn", "waterfall", "flash", "actionscript", "coldfusion"}
+
+        # Tracking variables
+        domains_covered = set()
+        trending_count = 0
+        impact_count = 0
         legacy_count = 0
-        neutral_count = 0
 
+        # Evaluate constraints
         for skill in user_skills:
-            if any(m in skill for m in modern):
-                modern_count += 1
-            elif any(l in skill for l in legacy):
+            # 1. Check Domains
+            for domain_name, domain_skills in domain_mapping.items():
+                if any(ds in skill.split(' ') or ds == skill for ds in domain_skills):
+                    domains_covered.add(domain_name)
+            
+            # 2. Check Trending
+            if any(t in skill for t in trending_tech):
+                trending_count += 1
+                
+            # 3. Check High Impact
+            if any(i in skill for i in high_impact_tech):
+                impact_count += 1
+                
+            # 4. Check Legacy
+            if any(l in skill for l in legacy_tech):
                 legacy_count += 1
-            else:
-                neutral_count += 1
 
-        # Calculate impact with diminishing returns (caps via min/max)
-        modern_impact = min(modern_count * 2.0, 20.0)      # Max -20% risk deduction
-        legacy_impact = min(legacy_count * 3.0, 20.0)      # Max +20% risk penalty
-        neutral_impact = min(neutral_count * 0.5, 5.0)     # Max -5% risk deduction for sheer volume of neutral skills
-        
-        adjustment = (-modern_impact) + legacy_impact + (-neutral_impact)
+        domain_count = len(domains_covered)
+        adjustment = 0
 
-        if modern_count > 0:
-            reasons.append(f"Skill Advantage: You have {modern_count} modern/in-demand skills, reducing your risk by {modern_impact}%.")
+        # Calculate logical weights (Max deduction combinations approx -35%)
+        # Cross-Domain Diversity Bonus
+        if domain_count >= 4:
+            domain_bonus = -15
+            reasons.append(f"Strong Cross-Domain Expertise: You span {domain_count} distinct tech domains (e.g. Frontend, DB, Cloud), significantly boosting your career stability (-15% risk).")
+        elif domain_count >= 2:
+            domain_bonus = -8
+            reasons.append(f"Skill Diversity: You cover {domain_count} tech domains, showing good flexibility (-8% risk).")
+        else:
+            domain_bonus = 0
+            if volume > 4:
+                # Weak Diversity Penalty: High skill count but only 1 domain.
+                domain_bonus = +5
+                reasons.append(f"Weak Diversity: You listed {volume} skills, but they are concentrated in only 1 tech domain. Diverse teams prefer cross-functional engineers (+5% risk).")
+
+        adjustment += domain_bonus
+
+        # Trending Market Presence Bonus
+        if trending_count >= 3:
+            impact_mod = -10
+            reasons.append(f"Trending Technologies: You use {trending_count} highly sought-after tools (like Cloud/AI/DevOps), making you extremely marketable (-10% risk).")
+            adjustment += impact_mod
+        elif trending_count > 0:
+            impact_mod = -5
+            reasons.append(f"Trending Knowledge: You possess {trending_count} trending tech skills (-5% risk).")
+            adjustment += impact_mod
+            
+        # Outcome Impact / Hardcore Engineering Power Bonus
+        if impact_count >= 2:
+            outcome_mod = -10
+            reasons.append(f"High Business Impact: Skills like AI, Data Eng, or Security directly protect or generate enterprise revenue. Excellent future-proofing (-10% risk).")
+            adjustment += outcome_mod
+        elif impact_count == 1:
+            outcome_mod = -5
+            reasons.append(f"Valuable Specialty: You possess a high-impact outcome skill (+1 Security/AI/Data), providing strong job security (-5% risk).")
+            adjustment += outcome_mod
+
+        # Legacy Penalty
+        legacy_impact = min(legacy_count * 5.0, 20.0)
+        adjustment += legacy_impact
+
         if legacy_count > 0:
-            reasons.append(f"Skill Warning: You listed {legacy_count} legacy technologies, increasing your risk by {legacy_impact}%.")
-        if neutral_count > 0:
-            reasons.append(f"Skill Breadth: Your general knowledge of {neutral_count} additional skills reduces your risk slightly by {neutral_impact}%.")
+            reasons.append(f"Legacy Tech Warning: Relying on {legacy_count} outdated technologies increases your risk of technological redundancy (+{legacy_impact}% risk).")
+            
         if volume == 0:
-            reasons.append("Skill Warning: No skills provided. Adding skills strongly impacts your layoff risk calculation.")
+            reasons.append("Skill Warning: No skills provided. Career stability requires an active toolkit.")
 
         # Experience Calculation (Safety check for NoneType)
         exp = data.years_experience if data.years_experience is not None else 0
